@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hábitos Saudáveis | Meus Hábitos</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #3a86ff;
+        --primary-light: #8bb8ff;
+        --primary-dark: #2667cc;
+        --secondary: #8338ec;
+        --background: #f8f9fa;
+        --text: #212529;
+        --text-light: #6c757d;
+        --card-bg: #ffffff;
+        --shadow: rgba(0, 0, 0, 0.08);
+        --shadow-hover: rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s ease;
+        --border-radius: 12px;
+        --border-radius-sm: 8px;
+        --success: #2ecc71;
+        --success-light: #81e9b1;
+        --warning: #e74c3c;
+        --progress-bg: #e0e0e0;
+        --progress-fill: #27ae60;
+        --calendar-day: #f8f9fa;
+        --calendar-today: #e3f2fd;
+        --calendar-selected: #bbdefb;
+        --calendar-has-habits: #e8f5e9;
+        --sidebar-width: 300px;
+        --content-padding: 1.5rem;
+        --achievement-gold: #ffd700;
+        --achievement-silver: #c0c0c0;
+        --achievement-bronze: #cd7f32;
+      }
+
+      .dark-mode {
+        --primary: #4cc9f0;
+        --primary-light: #8fdff8;
+        --primary-dark: #3aa8cc;
+        --secondary: #7209b7;
+        --background: #121212;
+        --text: #f8f9fa;
+        --text-light: #adb5bd;
+        --card-bg: #1e1e1e;
+        --shadow: rgba(0, 0, 0, 0.2);
+        --shadow-hover: rgba(0, 0, 0, 0.3);
+        --progress-bg: #333;
+        --progress-fill: #2ecc71;
+        --calendar-day: #2d2d2d;
+        --calendar-today: #0d47a1;
+        --calendar-selected: #1a237e;
+        --calendar-has-habits: #1b5e20;
+        --achievement-gold: #ffd700;
+        --achievement-silver: #c0c0c0;
+        --achievement-bronze: #cd7f32;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text);
+        min-height: 100vh;
+        transition: var(--transition);
+        line-height: 1.5;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container {
+        display: flex;
+        flex: 1;
+        position: relative;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: var(--content-padding);
+        margin: 0 auto;
+        max-width: 1000px;
+        width: 100%;
+        transition: var(--transition);
+      }
+
+      .main-content.with-sidebar {
+        margin-left: var(--sidebar-width);
+        margin-right: auto;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 45%;
+        height: 100vh;
+        background-color: var(--card-bg);
+        box-shadow: 2px 0 10px var(--shadow);
+        z-index: 90;
+        transition: left 0.3s ease;
+        padding: 1rem;
+        overflow-y: auto;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 80;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        background: var(--card-bg);
+        border: none;
+        color: var(--text);
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: var(--transition);
+        padding: 0.5rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px var(--shadow);
+        z-index: 100;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .toggle-sidebar {
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: var(--card-bg);
+        border: none;
+        color: var(--text);
+        font-size: 1.3rem;
+        cursor: pointer;
+        transition: var(--transition);
+        padding: 0.5rem;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px var(--shadow);
+        z-index: 100;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .toggle-sidebar.hidden {
+        display: none;
+      }
+
+      h1 {
+        color: var(--primary);
+        font-size: clamp(1.6rem, 4vw, 2.2rem);
+        margin: 1rem 0 1.5rem;
+        text-align: center;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+      }
+
+      .user-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.2rem;
+        padding: 0.8rem 1rem;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 4px var(--shadow);
+      }
+
+      .user-info span {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .user-info button {
+        padding: 0.4rem 0.8rem;
+        background-color: var(--warning);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .user-info button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+
+      /* Abas */
+      .tabs {
+        display: flex;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid var(--text-light);
+      }
+
+      .tab {
+        padding: 0.8rem 1.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-light);
+        transition: var(--transition);
+        border-bottom: 3px solid transparent;
+      }
+
+      .tab.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      .tab:hover:not(.active) {
+        color: var(--text);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Calendário Minimalista */
+      .calendar-container {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        box-shadow: 0 2px 4px var(--shadow);
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+        height: auto;
+        min-height: 500px;
+        padding: 1.5rem;
+      }
+
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.8rem;
+      }
+
+      .calendar-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .calendar-nav {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .calendar-nav button {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .calendar-nav button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      .calendar-nav button#today {
+        width: auto;
+        padding: 0 0.8rem;
+        font-size: 0.8rem;
+      }
+
+      .calendar-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.3rem;
+        margin-bottom: 0.4rem;
+        text-align: center;
+        font-weight: 500;
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0.3rem;
+        min-height: 250px;
+      }
+
+      .calendar-day {
+        aspect-ratio: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+        background-color: var(--calendar-day);
+        position: relative;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border: 1px solid transparent;
+      }
+
+      .calendar-day:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 5px var(--shadow-hover);
+        border-color: var(--primary-light);
+      }
+
+      .calendar-day.today {
+        border: 2px solid var(--primary);
+        font-weight: bold;
+      }
+
+      .calendar-day.selected {
+        background-color: var(--calendar-selected);
+        font-weight: bold;
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px var(--shadow-hover);
+      }
+
+      .calendar-day.has-habits {
+        background-color: var(--calendar-has-habits);
+      }
+
+      .calendar-day.other-month {
+        opacity: 0.4;
+      }
+
+      .calendar-day .day-number {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+      }
+
+      .calendar-day .day-habits-count {
+        font-size: 0.6rem;
+        background-color: var(--primary);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .calendar-day .day-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background-color: var(--progress-bg);
+        border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+        overflow: hidden;
+      }
+
+      .calendar-day .day-progress-fill {
+        height: 100%;
+        background-color: var(--progress-fill);
+        width: 0%;
+        transition: width 0.5s ease;
+      }
+
+      /* Dia Expandido */
+      .day-expanded {
+        flex: 1;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px var(--shadow);
+        transition: all 0.3s ease;
+        max-height: calc(100vh - 2 * var(--content-padding));
+        overflow-y: auto;
+      }
+
+      .day-expanded-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .day-expanded-title {
+        font-size: 1.3rem;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .day-expanded-progress {
+        margin-bottom: 1.5rem;
+        margin-top: 10px;
+      }
+
+      .day-expanded-progress-bar {
+        width: 100%;
+        height: 8px;
+        background-color: var(--progress-bg);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.4rem;
+      }
+
+      .day-expanded-progress-fill {
+        height: 100%;
+        background-color: var(--progress-fill);
+        width: 0%;
+        transition: width 0.5s ease;
+        border-radius: 4px;
+      }
+
+      .day-expanded-progress-text {
+        font-size: 0.9rem;
+        text-align: center;
+        font-weight: 600;
+        color: var(--text-light);
+      }
+
+      /* Progresso total */
+      .progresso-total-container {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        box-shadow: 0 2px 4px var(--shadow);
+        margin-bottom: 1.5rem;
+      }
+
+      .progresso-total-container h2 {
+        color: var(--primary);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .progresso-total-bar {
+        width: 100%;
+        height: 8px;
+        background-color: var(--progress-bg);
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 0.4rem;
+      }
+
+      .progresso-total-fill {
+        height: 100%;
+        background-color: var(--progress-fill);
+        width: 0%;
+        transition: width 0.5s ease;
+        border-radius: 4px;
+      }
+
+      .progresso-total-text {
+        font-size: 0.8rem;
+        text-align: right;
+        font-weight: 600;
+        color: var(--text-light);
+      }
+
+      /* Hábitos */
+      .habitos-container {
+        margin-bottom: 1.5rem;
+      }
+
+      .habito-card {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+        box-shadow: 0 2px 4px var(--shadow);
+        transition: var(--transition);
+        border-left: 3px solid var(--primary);
+        position: relative;
+      }
+
+      .habito-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px var(--shadow-hover);
+      }
+
+      .habito-card h3 {
+        margin: 0 0 0.3rem 0;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+        position: relative;
+      }
+
+      .habito-card.completed h3 {
+        text-decoration: line-through;
+        color: var(--text-light);
+      }
+
+      .habito-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.3rem;
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .habito-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+      }
+
+      .btn {
+        padding: 0.4rem 0.8rem;
+        border: none;
+        border-radius: var(--border-radius-sm);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px var(--shadow-hover);
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        margin-top: 10px;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .btn-success {
+        background-color: var(--success);
+        color: white;
+      }
+
+      .btn-success:hover {
+        background-color: #27ae60;
+      }
+
+      .btn-danger {
+        background-color: var(--warning);
+        color: white;
+      }
+
+      .btn-secondary {
+        background-color: #f1f1f1;
+        color: var(--text);
+      }
+
+      .dark-mode .btn-secondary {
+        background-color: #2d2d2d;
+      }
+
+      .btn-secondary:hover {
+        background-color: #e0e0e0;
+      }
+
+      .dark-mode .btn-secondary:hover {
+        background-color: #3d3d3d;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 1.5rem;
+        color: var(--text-light);
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 4px var(--shadow);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .empty-state i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary-light);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(3px);
+      }
+
+      .modal-content {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transform: translateY(-20px);
+        opacity: 0;
+        animation: modalFadeIn 0.3s ease-out forwards;
+      }
+
+      @keyframes modalFadeIn {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.2rem;
+      }
+
+      .modal-header h2 {
+        color: var(--primary);
+        margin: 0;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .close-modal {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-light);
+        transition: var(--transition);
+      }
+
+      .close-modal:hover {
+        color: var(--warning);
+        transform: rotate(90deg);
+      }
+
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.7rem;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid #e0e0e0;
+        background-color: var(--card-bg);
+        color: var(--text);
+        font-size: 0.9rem;
+        transition: var(--transition);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary-light);
+      }
+
+      .form-group textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        margin-top: 1.2rem;
+      }
+
+      /* Checkbox personalizado para dias da semana */
+      .dias-semana {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+      }
+
+      .dia-label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        padding: 0.4rem;
+        border-radius: var(--border-radius-sm);
+        transition: var(--transition);
+      }
+
+      .dia-label:hover {
+        background-color: var(--primary-light);
+        color: white;
+      }
+
+      .dia-checkbox {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--primary);
+        border-radius: 3px;
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .dia-checkbox:checked {
+        background-color: var(--primary);
+      }
+
+      .dia-checkbox:checked::after {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        color: white;
+        font-size: 0.7rem;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* Notificações */
+      .notification {
+        position: fixed;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--success);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        animation: slideIn 0.3s ease-out, fadeOut 0.5s ease-in 2.5s forwards;
+      }
+
+      .notification.error {
+        background-color: var(--warning);
+      }
+
+      .notification.achievement {
+        background-color: var(--achievement-gold);
+        color: #333;
+        font-weight: bold;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+
+      @keyframes slideIn {
+        from {
+          top: -100px;
+          opacity: 0;
+        }
+        to {
+          top: 15px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      /* Notificação de hábito */
+      .habit-notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        box-shadow: 0 4px 15px var(--shadow);
+        z-index: 1001;
+        max-width: 350px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        transform: translateX(120%);
+        transition: transform 0.3s ease-out;
+        border-left: 4px solid var(--primary);
+      }
+
+      .habit-notification.show {
+        transform: translateX(0);
+      }
+
+      .habit-notification-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .habit-notification-title {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .habit-notification-close {
+        background: none;
+        border: none;
+        color: var(--text-light);
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .habit-notification-body {
+        font-size: 0.9rem;
+      }
+
+      .habit-notification-time {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-top: 0.3rem;
+      }
+
+      .habit-notification-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+      }
+
+      /* Conquistas */
+      .achievements-container {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1rem;
+        box-shadow: 0 2px 4px var(--shadow);
+        margin-bottom: 1.5rem;
+      }
+
+      .achievements-container h2 {
+        color: var(--primary);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      .achievement-card {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem;
+        margin-bottom: 0.5rem;
+        border-radius: var(--border-radius-sm);
+        background-color: var(--background);
+        transition: var(--transition);
+      }
+
+      .achievement-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px var(--shadow-hover);
+      }
+
+      .achievement-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .achievement-icon.gold {
+        background-color: var(--achievement-gold);
+        color: #333;
+      }
+
+      .achievement-icon.silver {
+        background-color: var(--achievement-silver);
+        color: #333;
+      }
+
+      .achievement-icon.bronze {
+        background-color: var(--achievement-bronze);
+        color: white;
+      }
+
+      .achievement-details {
+        flex: 1;
+      }
+
+      .achievement-title {
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+
+      .achievement-description {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .achievement-progress {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      .achievement-completed {
+        color: var(--success);
+        font-weight: 600;
+        margin-left: 0.5rem;
+      }
+
+      /* Aba de Conquistas */
+      .achievements-tab {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px var(--shadow);
+      }
+
+      .achievements-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .achievements-title {
+        font-size: 1.3rem;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .achievements-stats {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .stat-card {
+        background-color: var(--background);
+        padding: 0.8rem 1.2rem;
+        border-radius: var(--border-radius-sm);
+        text-align: center;
+        min-width: 100px;
+      }
+
+      .stat-card h3 {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-card p {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .achievements-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+      }
+
+      /* Configurações */
+      .settings-tab {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px var(--shadow);
+      }
+
+      .settings-section {
+        margin-bottom: 2rem;
+      }
+
+      .settings-section h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .setting-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid var(--background);
+      }
+
+      .setting-item:last-child {
+        border-bottom: none;
+      }
+
+      .setting-label {
+        font-weight: 500;
+      }
+
+      .setting-description {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-top: 0.3rem;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: var(--transition);
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: var(--transition);
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: var(--primary);
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      .select-container {
+        position: relative;
+        width: 150px;
+      }
+
+      .select-container select {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: var(--border-radius-sm);
+        border: 1px solid var(--text-light);
+        background-color: var(--card-bg);
+        color: var(--text);
+        font-size: 0.9rem;
+        appearance: none;
+      }
+
+      .select-container::after {
+        content: "\f078";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--text-light);
+        font-size: 0.8rem;
+      }
+
+      .btn-save-settings {
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      /* Modal de confirmação */
+      .confirmation-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .confirmation-content {
+        background-color: var(--card-bg);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .confirmation-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        justify-content: center;
+      }
+
+      /* Responsividade */
+      @media (max-width: 768px) {
+        .dias-semana {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .habito-meta {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.3rem;
+        }
+
+        .calendar-day .day-number {
+          font-size: 0.8rem;
+        }
+
+        .calendar-day .day-habits-count {
+          width: 16px;
+          height: 16px;
+          font-size: 0.5rem;
+        }
+
+        .main-content.with-sidebar {
+          margin-left: 0;
+        }
+
+        .sidebar {
+          width: 280px;
+        }
+
+        .day-expanded {
+          margin-left: 0;
+          margin-top: 1rem;
+        }
+
+        .achievements-stats {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .stat-card {
+          min-width: auto;
+        }
+
+        .achievements-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .settings-section {
+          margin-bottom: 1.5rem;
+        }
+
+        .setting-item {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+
+        .select-container {
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+
+        .habit-notification {
+          max-width: calc(100% - 40px);
+          right: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .dias-semana {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .modal-content {
+          padding: 1rem;
+          margin: 0 1rem;
+        }
+
+        .tabs {
+          flex-wrap: wrap;
+        }
+
+        .tab {
+          padding: 0.6rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="theme-toggle" aria-label="Alterar tema">
+      <i class="fas fa-moon"></i>
+    </button>
+
+    <button class="toggle-sidebar" aria-label="Abrir calendário">
+      <i class="fas fa-calendar"></i>
+    </button>
+
+    <div class="sidebar-overlay"></div>
+
+    <div class="sidebar">
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <h2 class="calendar-title" id="calendar-month-year">Junho 2025</h2>
+          <div class="calendar-nav">
+            <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+            <button id="today">Hoje</button>
+            <button id="next-month">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar-weekdays">
+          <div>D</div>
+          <div>S</div>
+          <div>T</div>
+          <div>Q</div>
+          <div>Q</div>
+          <div>S</div>
+          <div>S</div>
+        </div>
+
+        <div class="calendar-days" id="calendar-days">
+          <!-- Dias serão preenchidos via JavaScript -->
+        </div>
+      </div>
+
+      <div class="progresso-total-container">
+        <h2><i class="fas fa-chart-line"></i> Progresso Mensal</h2>
+        <div class="progresso-total-bar">
+          <div class="progresso-total-fill" id="progresso-total"></div>
+        </div>
+        <div class="progresso-total-text" id="progresso-total-text">
+          0% completo
+        </div>
+      </div>
+
+      <div class="achievements-container">
+        <h2><i class="fas fa-trophy"></i> Minhas Conquistas</h2>
+        <div id="achievements-list">
+          <!-- Conquistas serão preenchidas via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="main-content">
+        <h1><i class="fas fa-heartbeat"></i> Meus Hábitos</h1>
+
+        <div class="user-info">
+          <span id="username">Olá, Usuário</span>
+          <button id="btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Sair
+          </button>
+        </div>
+
+        <div class="tabs">
+          <div class="tab active" data-tab="habitos">Hábitos</div>
+          <div class="tab" data-tab="conquistas">Conquistas</div>
+          <div class="tab" data-tab="configuracoes">Configurações</div>
+        </div>
+
+        <div class="tab-content active" id="habitos-tab">
+          <div class="day-expanded" id="day-expanded">
+            <div class="empty-state">
+              <i class="fas fa-calendar-day"></i>
+              <p>Selecione um dia no calendário para ver seus hábitos</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="conquistas-tab">
+          <div class="achievements-tab">
+            <div class="achievements-header">
+              <h2 class="achievements-title"><i class="fas fa-trophy"></i> Minhas Conquistas</h2>
+              <div class="achievements-stats">
+                <div class="stat-card">
+                  <h3 id="total-achievements">0</h3>
+                  <p>Total</p>
+                </div>
+                <div class="stat-card">
+                  <h3 id="completed-achievements">0</h3>
+                  <p>Completas</p>
+                </div>
+                <div class="stat-card">
+                  <h3 id="progress-achievements">0%</h3>
+                  <p>Progresso</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="achievements-grid" id="achievements-grid">
+              <!-- Conquistas serão preenchidas via JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="configuracoes-tab">
+          <div class="settings-tab">
+            <div class="settings-section">
+              <h3><i class="fas fa-bell"></i> Notificações</h3>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Lembretes de hábitos</div>
+                  <div class="setting-description">Receber notificações para hábitos pendentes</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="notifications-toggle" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Lembretes diários</div>
+                  <div class="setting-description">Resumo diário do seu progresso</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="daily-summary-toggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Horário de notificação</div>
+                  <div class="setting-description">Horário preferencial para receber lembretes</div>
+                </div>
+                <div class="select-container">
+                  <select id="notification-time">
+                    <option value="08:00">08:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="20:00">20:00</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3><i class="fas fa-palette"></i> Aparência</h3>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Modo Escuro</div>
+                  <div class="setting-description">Ativar/desativar o tema escuro</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="dark-mode-toggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Cor Primária</div>
+                  <div class="setting-description">Escolha a cor principal do aplicativo</div>
+                </div>
+                <div class="select-container">
+                  <select id="primary-color">
+                    <option value="#3a86ff">Azul</option>
+                    <option value="#8338ec">Roxo</option>
+                    <option value="#2ecc71">Verde</option>
+                    <option value="#e74c3c">Vermelho</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="settings-section">
+              <h3><i class="fas fa-user-cog"></i> Conta</h3>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Exportar dados</div>
+                  <div class="setting-description">Baixar backup dos seus hábitos e conquistas</div>
+                </div>
+                <button class="btn btn-secondary" id="export-data">
+                  <i class="fas fa-download"></i> Exportar
+                </button>
+              </div>
+              
+              <div class="setting-item">
+                <div>
+                  <div class="setting-label">Redefinir dados</div>
+                  <div class="setting-description">Limpar todos os hábitos e conquistas</div>
+                </div>
+                <button class="btn btn-danger" id="reset-data">
+                  <i class="fas fa-trash"></i> Redefinir
+                </button>
+              </div>
+            </div>
+            
+            <button class="btn btn-primary btn-save-settings" id="save-settings">
+              <i class="fas fa-save"></i> Salvar Configurações
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para adicionar novo hábito -->
+    <div class="modal" id="modal-habito">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="fas fa-plus-circle"></i> Novo Hábito</h2>
+          <button class="close-modal">&times;</button>
+        </div>
+
+        <div class="form-group">
+          <label for="habito-nome">Nome do Hábito</label>
+          <input
+            type="text"
+            id="habito-nome"
+            placeholder="Ex: Beber água, Exercício físico"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="habito-horario">Horário</label>
+          <input type="time" id="habito-horario" />
+        </div>
+
+        <div class="form-group">
+          <label for="habito-descricao">Descrição (opcional)</label>
+          <textarea
+            id="habito-descricao"
+            placeholder="Detalhes sobre o hábito"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de hábito</label>
+          <div style="display: flex; gap: 0.5rem">
+            <label style="flex: 1">
+              <input
+                type="radio"
+                name="habito-tipo"
+                value="diario"
+                checked
+                style="margin-right: 0.5rem"
+              />
+              Diário (apenas hoje)
+            </label>
+            <label style="flex: 1">
+              <input
+                type="radio"
+                name="habito-tipo"
+                value="recorrente"
+                style="margin-right: 0.5rem"
+              />
+              Recorrente (vários dias)
+            </label>
+          </div>
+        </div>
+
+        <div
+          class="form-group"
+          id="dias-recorrentes-group"
+          style="display: none"
+        >
+          <label>Dias da Semana (para hábitos recorrentes)</label>
+          <div class="dias-semana">
+            <input
+              type="checkbox"
+              id="segunda"
+              class="dia-checkbox"
+              value="segunda"
+            />
+            <label for="segunda" class="dia-label">Segunda</label>
+
+            <input
+              type="checkbox"
+              id="terca"
+              class="dia-checkbox"
+              value="terca"
+            />
+            <label for="terca" class="dia-label">Terça</label>
+
+            <input
+              type="checkbox"
+              id="quarta"
+              class="dia-checkbox"
+              value="quarta"
+            />
+            <label for="quarta" class="dia-label">Quarta</label>
+
+            <input
+              type="checkbox"
+              id="quinta"
+              class="dia-checkbox"
+              value="quinta"
+            />
+            <label for="quinta" class="dia-label">Quinta</label>
+
+            <input
+              type="checkbox"
+              id="sexta"
+              class="dia-checkbox"
+              value="sexta"
+            />
+            <label for="sexta" class="dia-label">Sexta</label>
+
+            <input
+              type="checkbox"
+              id="sabado"
+              class="dia-checkbox"
+              value="sabado"
+            />
+            <label for="sabado" class="dia-label">Sábado</label>
+
+            <input
+              type="checkbox"
+              id="domingo"
+              class="dia-checkbox"
+              value="domingo"
+            />
+            <label for="domingo" class="dia-label">Domingo</label>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+          <button class="btn btn-primary" id="btn-salvar">Salvar Hábito</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmação para redefinir dados -->
+    <div class="confirmation-modal" id="reset-confirm-modal">
+      <div class="confirmation-content">
+        <h3><i class="fas fa-exclamation-triangle"></i> Confirmar Redefinição</h3>
+        <p>Tem certeza que deseja apagar todos os seus hábitos e conquistas? Esta ação não pode ser desfeita.</p>
+        <div class="confirmation-buttons">
+          <button class="btn btn-secondary" id="cancel-reset">Cancelar</button>
+          <button class="btn btn-danger" id="confirm-reset">Confirmar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificação de hábito -->
+    <div class="habit-notification" id="habit-notification">
+      <div class="habit-notification-header">
+        <h3 class="habit-notification-title"><i class="fas fa-bell"></i> Lembrete de Hábito</h3>
+        <button class="habit-notification-close">&times;</button>
+      </div>
+      <div class="habit-notification-body" id="habit-notification-body"></div>
+      <div class="habit-notification-time" id="habit-notification-time"></div>
+      <div class="habit-notification-actions">
+        <button class="btn btn-success" id="habit-notification-complete">Marcar como feito</button>
+        <button class="btn btn-secondary" id="habit-notification-snooze">Adiar 10 min</button>
+      </div>
+    </div>
+
+    <script>
+      // Verificar se usuário está logado
+      const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+      if (!usuarioLogado) {
+        window.location.href = "login.html";
+      }
+
+      // Sistema de modo claro/escuro
+      const themeToggle = document.querySelector(".theme-toggle");
+      const icon = themeToggle.querySelector("i");
+
+      // Verifica preferência do usuário
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const savedTheme = localStorage.getItem("theme");
+
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+        document.body.classList.add("dark-mode");
+        icon.classList.replace("fa-moon", "fa-sun");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          icon.classList.replace("fa-moon", "fa-sun");
+          localStorage.setItem("theme", "dark");
+        } else {
+          icon.classList.replace("fa-sun", "fa-moon");
+          localStorage.setItem("theme", "light");
+        }
+      });
+
+      // Configurar informações do usuário
+      document.getElementById("username").textContent = `Olá, ${
+        usuarioLogado.nome.split(" ")[0]
+      }`;
+
+      // Logout
+      document.getElementById("btn-logout").addEventListener("click", () => {
+        localStorage.removeItem("usuarioLogado");
+        localStorage.removeItem("habitos");
+        localStorage.removeItem("achievements");
+        localStorage.removeItem("userSettings");
+        window.location.href = "login.html";
+      });
+
+      // Dias da semana
+      const diasSemana = [
+        "domingo",
+        "segunda",
+        "terca",
+        "quarta",
+        "quinta",
+        "sexta",
+        "sabado",
+      ];
+      const nomesDiasSemana = [
+        "Domingo",
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado",
+      ];
+      const meses = [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+      ];
+
+      // Obter data atual
+      const hoje = new Date();
+      let dataSelecionada = new Date(hoje);
+      let mesAtual = hoje.getMonth();
+      let anoAtual = hoje.getFullYear();
+
+      // Elementos do DOM
+      const calendarDays = document.getElementById("calendar-days");
+      const calendarMonthYear = document.getElementById("calendar-month-year");
+      const prevMonthBtn = document.getElementById("prev-month");
+      const nextMonthBtn = document.getElementById("next-month");
+      const todayBtn = document.getElementById("today");
+      const dayExpanded = document.getElementById("day-expanded");
+      const progressoTotal = document.getElementById("progresso-total");
+      const progressoTotalText = document.getElementById("progresso-total-text");
+      const achievementsList = document.getElementById("achievements-list");
+      const achievementsGrid = document.getElementById("achievements-grid");
+      const totalAchievementsEl = document.getElementById("total-achievements");
+      const completedAchievementsEl = document.getElementById("completed-achievements");
+      const progressAchievementsEl = document.getElementById("progress-achievements");
+      const habitNotification = document.getElementById("habit-notification");
+      const habitNotificationBody = document.getElementById("habit-notification-body");
+      const habitNotificationTime = document.getElementById("habit-notification-time");
+      const habitNotificationComplete = document.getElementById("habit-notification-complete");
+      const habitNotificationSnooze = document.getElementById("habit-notification-snooze");
+      const habitNotificationClose = document.querySelector(".habit-notification-close");
+
+      // Sidebar toggle
+      const toggleSidebarBtn = document.querySelector(".toggle-sidebar");
+      const sidebar = document.querySelector(".sidebar");
+      const sidebarOverlay = document.querySelector(".sidebar-overlay");
+
+      toggleSidebarBtn.addEventListener("click", () => {
+        sidebar.classList.add("open");
+        sidebarOverlay.classList.add("open");
+      });
+
+      sidebarOverlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        sidebarOverlay.classList.remove("open");
+      });
+
+      // Modal de hábito
+      const modalHabito = document.getElementById("modal-habito");
+      const btnCancelar = document.getElementById("btn-cancelar");
+      const closeModalBtn = document.querySelector(".close-modal");
+      const btnSalvar = document.getElementById("btn-salvar");
+      const habitoTipoRadios = document.querySelectorAll("input[name='habito-tipo']");
+      const diasRecorrentesGroup = document.getElementById("dias-recorrentes-group");
+
+      // Mostrar/ocultar dias recorrentes baseado no tipo de hábito
+      habitoTipoRadios.forEach(radio => {
+        radio.addEventListener("change", () => {
+          diasRecorrentesGroup.style.display = 
+            radio.value === "recorrente" ? "block" : "none";
+        });
+      });
+
+      // Fechar modal
+      const closeModal = () => {
+        modalHabito.style.display = "none";
+      };
+
+      btnCancelar.addEventListener("click", closeModal);
+      closeModalBtn.addEventListener("click", closeModal);
+
+      // Abrir modal para adicionar hábito
+      const openAddHabitoModal = () => {
+        // Resetar formulário
+        document.getElementById("habito-nome").value = "";
+        document.getElementById("habito-horario").value = "";
+        document.getElementById("habito-descricao").value = "";
+        document.querySelector("input[name='habito-tipo'][value='diario']").checked = true;
+        document.querySelectorAll(".dia-checkbox").forEach(checkbox => {
+          checkbox.checked = false;
+        });
+        diasRecorrentesGroup.style.display = "none";
+        
+        modalHabito.style.display = "flex";
+      };
+
+      // Sistema de conquistas
+      const achievements = [
+        {
+          id: 1,
+          title: "Iniciante",
+          description: "Complete seu primeiro hábito",
+          icon: "fas fa-seedling",
+          tier: "bronze",
+          target: 1,
+          completed: false
+        },
+        {
+          id: 2,
+          title: "Consistência",
+          description: "Complete hábitos por 3 dias consecutivos",
+          icon: "fas fa-calendar-check",
+          tier: "silver",
+          target: 3,
+          completed: false
+        },
+        {
+          id: 3,
+          title: "Mestre dos Hábitos",
+          description: "Complete 10 hábitos em um único dia",
+          icon: "fas fa-crown",
+          tier: "gold",
+          target: 10,
+          completed: false
+        },
+        {
+          id: 4,
+          title: "Semana Perfeita",
+          description: "Complete todos os hábitos planejados por uma semana",
+          icon: "fas fa-star",
+          tier: "gold",
+          target: 7,
+          completed: false
+        },
+        {
+          id: 5,
+          title: "Variedade",
+          description: "Crie 5 tipos diferentes de hábitos",
+          icon: "fas fa-layer-group",
+          tier: "silver",
+          target: 5,
+          completed: false
+        },
+        {
+          id: 6,
+          title: "Mestre da Manhã",
+          description: "Complete 5 hábitos matinais antes das 9h",
+          icon: "fas fa-sun",
+          tier: "silver",
+          target: 5,
+          completed: false
+        },
+        {
+          id: 7,
+          title: "30 Dias de Hábitos",
+          description: "Mantenha um hábito por 30 dias consecutivos",
+          icon: "fas fa-calendar-alt",
+          tier: "gold",
+          target: 30,
+          completed: false
+        },
+        {
+          id: 8,
+          title: "Equilíbrio",
+          description: "Complete hábitos em 3 categorias diferentes",
+          icon: "fas fa-balance-scale",
+          tier: "bronze",
+          target: 3,
+          completed: false
+        },
+        {
+          id: 9,
+          title: "Super Estreia",
+          description: "Complete 5 hábitos no primeiro dia",
+          icon: "fas fa-rocket",
+          tier: "bronze",
+          target: 5,
+          completed: false
+        },
+        {
+          id: 10,
+          title: "Lenda dos Hábitos",
+          description: "Complete todas as outras conquistas",
+          icon: "fas fa-trophy",
+          tier: "gold",
+          target: 9,
+          completed: false
+        }
+      ];
+
+      // Carregar conquistas do localStorage ou inicializar
+      let userAchievements = JSON.parse(localStorage.getItem("achievements")) || 
+        achievements.map(a => ({ ...a, progress: 0 }));
+
+      // Salvar conquistas no localStorage
+      const saveAchievements = () => {
+        localStorage.setItem("achievements", JSON.stringify(userAchievements));
+      };
+
+      // Configurações do usuário
+      let userSettings = JSON.parse(localStorage.getItem("userSettings")) || {
+        notifications: true,
+        dailySummary: false,
+        notificationTime: "08:00",
+        darkMode: document.body.classList.contains("dark-mode"),
+        primaryColor: "#3a86ff"
+      };
+
+      // Salvar configurações
+      const saveSettings = () => {
+        localStorage.setItem("userSettings", JSON.stringify(userSettings));
+        showNotification("Configurações salvas com sucesso!");
+        
+        // Aplicar configurações imediatamente
+        applySettings();
+      };
+
+      // Aplicar configurações
+      const applySettings = () => {
+        // Modo escuro
+        if (userSettings.darkMode) {
+          document.body.classList.add("dark-mode");
+          themeToggle.querySelector("i").classList.replace("fa-moon", "fa-sun");
+        } else {
+          document.body.classList.remove("dark-mode");
+          themeToggle.querySelector("i").classList.replace("fa-sun", "fa-moon");
+        }
+        
+        // Cor primária
+        document.documentElement.style.setProperty('--primary', userSettings.primaryColor);
+        document.documentElement.style.setProperty('--primary-dark', shadeColor(userSettings.primaryColor, -20));
+        document.documentElement.style.setProperty('--primary-light', shadeColor(userSettings.primaryColor, 20));
+      };
+
+      // Função para ajustar tonalidade da cor
+      const shadeColor = (color, percent) => {
+        let R = parseInt(color.substring(1,3), 16);
+        let G = parseInt(color.substring(3,5), 16);
+        let B = parseInt(color.substring(5,7), 16);
+
+        R = parseInt(R * (100 + percent) / 100);
+        G = parseInt(G * (100 + percent) / 100);
+        B = parseInt(B * (100 + percent) / 100);
+
+        R = (R<255)?R:255;  
+        G = (G<255)?G:255;  
+        B = (B<255)?B:255;  
+
+        const RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16));
+        const GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16));
+        const BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
+
+        return "#"+RR+GG+BB;
+      };
+
+      // Carregar configurações ao iniciar
+      const loadSettings = () => {
+        document.getElementById("notifications-toggle").checked = userSettings.notifications;
+        document.getElementById("daily-summary-toggle").checked = userSettings.dailySummary;
+        document.getElementById("notification-time").value = userSettings.notificationTime;
+        document.getElementById("dark-mode-toggle").checked = userSettings.darkMode;
+        
+        // Encontrar a opção de cor correspondente
+        const colorSelect = document.getElementById("primary-color");
+        for (let i = 0; i < colorSelect.options.length; i++) {
+          if (colorSelect.options[i].value === userSettings.primaryColor) {
+            colorSelect.selectedIndex = i;
+            break;
+          }
+        }
+        
+        applySettings();
+      };
+
+      // Mostrar notificação
+      const showNotification = (message, type = "success") => {
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+          <i class="fas fa-${type === "success" ? "check-circle" : "exclamation-circle"}"></i>
+          ${message}
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remover após animação
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      };
+
+      // Mostrar notificação de hábito
+      const showHabitNotification = (habito) => {
+        if (!userSettings.notifications) return;
+        
+        habitNotificationBody.textContent = `Hora de ${habito.nome.toLowerCase()}`;
+        habitNotificationTime.textContent = `Horário: ${habito.horario}`;
+        
+        // Configurar botão de completar
+        habitNotificationComplete.onclick = () => {
+          toggleCompleteHabito(habito.id);
+          hideHabitNotification();
+        };
+        
+        // Configurar botão de adiar
+        habitNotificationSnooze.onclick = () => {
+          hideHabitNotification();
+          // Agendar para mostrar novamente em 10 minutos
+          setTimeout(() => {
+            showHabitNotification(habito);
+          }, 10 * 60 * 1000);
+        };
+        
+        // Configurar botão de fechar
+        habitNotificationClose.onclick = hideHabitNotification;
+        
+        // Mostrar notificação
+        habitNotification.classList.add("show");
+        
+        // Esconder automaticamente após 1 minuto
+        setTimeout(() => {
+          if (habitNotification.classList.contains("show")) {
+            hideHabitNotification();
+          }
+        }, 60000);
+      };
+
+      // Esconder notificação de hábito
+      const hideHabitNotification = () => {
+        habitNotification.classList.remove("show");
+      };
+
+      // Verificar hábitos pendentes e mostrar notificações
+      const checkPendingHabits = () => {
+        if (!userSettings.notifications) return;
+        
+        const now = new Date();
+        const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const today = formatDate(now);
+        
+        // Buscar hábitos para hoje com horário definido e não completados
+        const pendingHabits = habitos.filter(habito => 
+          habito.data === today && 
+          habito.horario && 
+          !habito.completed &&
+          habito.horario <= currentTime
+        );
+        
+        // Se houver hábitos pendentes, mostrar notificação para o primeiro
+        if (pendingHabits.length > 0) {
+          const habito = pendingHabits[0];
+          showHabitNotification(habito);
+        }
+      };
+
+      // Verificar conquistas
+      const checkAchievements = (habitosCompletos) => {
+        const updatedAchievements = [...userAchievements];
+        let hasNewAchievement = false;
+        
+        // Conquista 1: Primeiro hábito completo
+        if (habitosCompletos.length >= 1 && !userAchievements[0].completed) {
+          updatedAchievements[0].progress = 1;
+          updatedAchievements[0].completed = true;
+          showNotification("🏆 Conquista desbloqueada: Iniciante!", "achievement");
+          hasNewAchievement = true;
+        }
+        
+        // Conquista 3: 10 hábitos em um dia
+        if (habitosCompletos.length >= 10 && !userAchievements[2].completed) {
+          updatedAchievements[2].progress = 10;
+          updatedAchievements[2].completed = true;
+          showNotification("🏆 Conquista desbloqueada: Mestre dos Hábitos!", "achievement");
+          hasNewAchievement = true;
+        }
+        
+        // Conquista 9: Super Estreia (5 hábitos no primeiro dia)
+        if (habitosCompletos.length >= 5 && !userAchievements[8].completed) {
+          updatedAchievements[8].progress = 5;
+          updatedAchievements[8].completed = true;
+          showNotification("🏆 Conquista desbloqueada: Super Estreia!", "achievement");
+          hasNewAchievement = true;
+        }
+        
+        // Atualizar localStorage se houver mudanças
+        if (hasNewAchievement) {
+          userAchievements = updatedAchievements;
+          saveAchievements();
+          renderAchievements();
+          renderAchievementsTab();
+        }
+      };
+
+      // Renderizar conquistas na sidebar
+      const renderAchievements = () => {
+        achievementsList.innerHTML = userAchievements.slice(0, 3).map(achievement => `
+          <div class="achievement-card">
+            <div class="achievement-icon ${achievement.tier}">
+              <i class="${achievement.icon}"></i>
+            </div>
+            <div class="achievement-details">
+              <div class="achievement-title">${achievement.title}</div>
+              <div class="achievement-description">${achievement.description}</div>
+            </div>
+            <div class="achievement-progress">
+              ${achievement.completed ? 
+                '<span class="achievement-completed"><i class="fas fa-check"></i></span>' : 
+                `${achievement.progress}/${achievement.target}`}
+            </div>
+          </div>
+        `).join("");
+      };
+
+      // Renderizar aba de conquistas
+      const renderAchievementsTab = () => {
+        const completed = userAchievements.filter(a => a.completed).length;
+        const total = userAchievements.length;
+        const progress = Math.round((completed / total) * 100);
+        
+        totalAchievementsEl.textContent = total;
+        completedAchievementsEl.textContent = completed;
+        progressAchievementsEl.textContent = `${progress}%`;
+        
+        achievementsGrid.innerHTML = userAchievements.map(achievement => `
+          <div class="achievement-card">
+            <div class="achievement-icon ${achievement.tier}">
+              <i class="${achievement.icon}"></i>
+            </div>
+            <div class="achievement-details">
+              <div class="achievement-title">${achievement.title}</div>
+              <div class="achievement-description">${achievement.description}</div>
+              <div class="achievement-progress">
+                ${achievement.completed ? 
+                  '<span class="achievement-completed">Concluído!</span>' : 
+                  `Progresso: ${achievement.progress}/${achievement.target}`}
+              </div>
+            </div>
+          </div>
+        `).join("");
+      };
+
+      // Carregar hábitos do localStorage ou inicializar array vazio
+      let habitos = JSON.parse(localStorage.getItem("habitos")) || [];
+
+      // Salvar hábitos no localStorage
+      const saveHabitos = () => {
+        localStorage.setItem("habitos", JSON.stringify(habitos));
+      };
+
+      // Gerar ID único
+      const generateId = () => {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+      };
+
+      // Formatar data para YYYY-MM-DD
+      const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      };
+
+      // Formatar hora para HH:MM
+      const formatTime = (time) => {
+        if (!time) return "";
+        const [hours, minutes] = time.split(":");
+        return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+      };
+
+      // Adicionar novo hábito
+      const addHabito = (e) => {
+        e.preventDefault();
+        
+        const nome = document.getElementById("habito-nome").value.trim();
+        const horario = document.getElementById("habito-horario").value;
+        const descricao = document.getElementById("habito-descricao").value.trim();
+        const tipo = document.querySelector("input[name='habito-tipo']:checked").value;
+        
+        if (!nome) {
+          showNotification("Por favor, insira um nome para o hábito", "error");
+          return;
+        }
+        
+        const novoHabito = {
+          id: generateId(),
+          nome,
+          horario: formatTime(horario),
+          descricao,
+          completed: false,
+          createdAt: new Date().toISOString()
+        };
+        
+        if (tipo === "diario") {
+          // Hábito único para o dia selecionado
+          novoHabito.data = formatDate(dataSelecionada);
+          habitos.push(novoHabito);
+          
+          // Se tiver horário, agendar notificação
+          if (novoHabito.horario) {
+            scheduleHabitNotification(novoHabito);
+          }
+        } else {
+          // Hábito recorrente para os dias selecionados
+          const diasSelecionados = Array.from(document.querySelectorAll(".dia-checkbox:checked"))
+            .map(checkbox => checkbox.value);
+          
+          if (diasSelecionados.length === 0) {
+            showNotification("Selecione pelo menos um dia da semana", "error");
+            return;
+          }
+          
+          // Adiciona um hábito para cada dia selecionado nos próximos 30 dias
+          const datas = [];
+          for (let i = 0; i < 30; i++) {
+            const date = new Date();
+            date.setDate(date.getDate() + i);
+            const dayOfWeek = diasSemana[date.getDay()];
+            
+            if (diasSelecionados.includes(dayOfWeek)) {
+              const habitoRecorrente = { ...novoHabito, id: generateId() };
+              habitoRecorrente.data = formatDate(date);
+              habitos.push(habitoRecorrente);
+              
+              // Se tiver horário, agendar notificação
+              if (habitoRecorrente.horario) {
+                scheduleHabitNotification(habitoRecorrente);
+              }
+            }
+          }
+        }
+        
+        saveHabitos();
+        closeModal();
+        showNotification("Hábito adicionado com sucesso!");
+        
+        // Atualizar calendário e dia expandido
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+      };
+
+      // Agendar notificação para um hábito
+      const scheduleHabitNotification = (habito) => {
+        if (!userSettings.notifications) return;
+        
+        const now = new Date();
+        const habitDate = new Date(habito.data);
+        const [hours, minutes] = habito.horario.split(":");
+        
+        // Definir a data/hora do hábito
+        habitDate.setHours(parseInt(hours));
+        habitDate.setMinutes(parseInt(minutes));
+        
+        // Se o hábito já passou hoje, não agendar
+        if (habitDate < now) return;
+        
+        // Calcular o tempo até a notificação
+        const timeUntilNotification = habitDate.getTime() - now.getTime();
+        
+        // Agendar a notificação
+        setTimeout(() => {
+          showHabitNotification(habito);
+        }, timeUntilNotification);
+      };
+
+      btnSalvar.addEventListener("click", addHabito);
+
+      // Renderizar calendário
+      const renderCalendar = () => {
+        const firstDay = new Date(anoAtual, mesAtual, 1);
+        const lastDay = new Date(anoAtual, mesAtual + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDay = firstDay.getDay();
+        
+        calendarMonthYear.textContent = `${meses[mesAtual]} ${anoAtual}`;
+        
+        let daysHtml = "";
+        
+        // Dias do mês anterior
+        const prevMonthLastDay = new Date(anoAtual, mesAtual, 0).getDate();
+        for (let i = 0; i < startingDay; i++) {
+          const day = prevMonthLastDay - startingDay + i + 1;
+          daysHtml += `<div class="calendar-day other-month">${day}</div>`;
+        }
+        
+        // Dias do mês atual
+        for (let i = 1; i <= daysInMonth; i++) {
+          const date = new Date(anoAtual, mesAtual, i);
+          const dateStr = formatDate(date);
+          
+          // Verificar se há hábitos neste dia
+          const habitosNoDia = habitos.filter(h => h.data === dateStr);
+          const completos = habitosNoDia.filter(h => h.completed).length;
+          const progresso = habitosNoDia.length > 0 ? 
+            Math.round((completos / habitosNoDia.length) * 100) : 0;
+          
+          // Verificar se é hoje
+          const isToday = date.toDateString() === hoje.toDateString();
+          // Verificar se é o dia selecionado
+          const isSelected = date.toDateString() === dataSelecionada.toDateString();
+          // Verificar se tem hábitos
+          const hasHabits = habitosNoDia.length > 0;
+          
+          let dayClass = "calendar-day";
+          if (isToday) dayClass += " today";
+          if (isSelected) dayClass += " selected";
+          if (hasHabits) dayClass += " has-habits";
+          
+          daysHtml += `
+            <div class="${dayClass}" data-date="${dateStr}">
+              <div class="day-number">${i}</div>
+              ${habitosNoDia.length > 0 ? 
+                `<div class="day-habits-count">${completos}/${habitosNoDia.length}</div>` : ""}
+              <div class="day-progress">
+                <div class="day-progress-fill" style="width: ${progresso}%"></div>
+              </div>
+            </div>
+          `;
+        }
+        
+        // Dias do próximo mês
+        const totalDays = startingDay + daysInMonth;
+        const remainingDays = 7 - (totalDays % 7);
+        if (remainingDays < 7) {
+          for (let i = 1; i <= remainingDays; i++) {
+            daysHtml += `<div class="calendar-day other-month">${i}</div>`;
+          }
+        }
+        
+        calendarDays.innerHTML = daysHtml;
+        
+        // Adicionar eventos aos dias
+        document.querySelectorAll(".calendar-day").forEach(day => {
+          day.addEventListener("click", () => {
+            const dateStr = day.getAttribute("data-date");
+            if (!dateStr) return;
+            
+            const [year, month, dayNum] = dateStr.split("-");
+            dataSelecionada = new Date(year, month - 1, dayNum);
+            
+            // Atualizar calendário para remover a seleção anterior
+            renderCalendar();
+            // Mostrar hábitos do dia selecionado
+            renderDayExpanded(dataSelecionada);
+          });
+        });
+        
+        // Atualizar progresso mensal
+        updateMonthlyProgress();
+      };
+
+      // Atualizar progresso mensal
+      const updateMonthlyProgress = () => {
+        const firstDay = new Date(anoAtual, mesAtual, 1);
+        const lastDay = new Date(anoAtual, mesAtual + 1, 0);
+        
+        // Filtrar hábitos do mês atual
+        const habitosMes = habitos.filter(h => {
+          const habitDate = new Date(h.data);
+          return habitDate >= firstDay && habitDate <= lastDay;
+        });
+        
+        const totalHabitos = habitosMes.length;
+        const completos = habitosMes.filter(h => h.completed).length;
+        const progresso = totalHabitos > 0 ? Math.round((completos / totalHabitos) * 100) : 0;
+        
+        progressoTotal.style.width = `${progresso}%`;
+        progressoTotalText.textContent = `${progresso}% completo`;
+      };
+
+      // Renderizar dia expandido com hábitos
+      const renderDayExpanded = (date) => {
+        const dateStr = formatDate(date);
+        const dayOfWeek = nomesDiasSemana[date.getDay()];
+        const dayNum = date.getDate();
+        const month = meses[date.getMonth()];
+        const year = date.getFullYear();
+        
+        const habitosNoDia = habitos.filter(h => h.data === dateStr);
+        const completos = habitosNoDia.filter(h => h.completed).length;
+        const progresso = habitosNoDia.length > 0 ? 
+          Math.round((completos / habitosNoDia.length) * 100) : 0;
+        
+        let habitsHtml = "";
+        
+        if (habitosNoDia.length === 0) {
+          habitsHtml = `
+            <div class="empty-state">
+              <i class="fas fa-calendar-day"></i>
+              <p>Nenhum hábito para ${dayOfWeek}, ${dayNum} de ${month} de ${year}</p>
+              <button class="btn btn-primary" id="btn-add-habito">
+                <i class="fas fa-plus"></i> Adicionar Hábito
+              </button>
+            </div>
+          `;
+        } else {
+          habitsHtml = `
+            <div class="day-expanded-header">
+              <h2 class="day-expanded-title">
+                ${dayOfWeek}, ${dayNum} de ${month} de ${year}
+              </h2>
+              <button class="btn btn-primary" id="btn-add-habito">
+                <i class="fas fa-plus"></i> Adicionar Hábito
+              </button>
+            </div>
+            
+            <div class="day-expanded-progress">
+              <div class="day-expanded-progress-bar">
+                <div class="day-expanded-progress-fill" style="width: ${progresso}%"></div>
+              </div>
+              <div class="day-expanded-progress-text">
+                ${completos} de ${habitosNoDia.length} hábitos completos (${progresso}%)
+              </div>
+            </div>
+            
+            <div class="habitos-container" id="habitos-container">
+              ${habitosNoDia.map(habito => `
+                <div class="habito-card ${habito.completed ? 'completed' : ''}" data-id="${habito.id}">
+                  <h3>
+                    <i class="fas ${habito.completed ? 'fa-check-circle' : 'fa-circle'}"></i>
+                    ${habito.nome}
+                    ${habito.horario ? `<span style="font-size: 0.8rem; color: var(--text-light); margin-left: 0.5rem;">${habito.horario}</span>` : ''}
+                  </h3>
+                  ${habito.descricao ? `<p style="font-size: 0.9rem; color: var(--text-light); margin: 0.3rem 0;">${habito.descricao}</p>` : ''}
+                  <div class="habito-actions">
+                    <button class="btn ${habito.completed ? 'btn-secondary' : 'btn-success'} btn-toggle-complete">
+                      <i class="fas ${habito.completed ? 'fa-undo' : 'fa-check'}"></i>
+                      ${habito.completed ? 'Reabrir' : 'Completar'}
+                    </button>
+                    <button class="btn btn-danger btn-remove-habito">
+                      <i class="fas fa-trash"></i> Remover
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+        
+        dayExpanded.innerHTML = habitsHtml;
+        
+        // Adicionar eventos aos botões
+        document.getElementById('btn-add-habito')?.addEventListener('click', openAddHabitoModal);
+        
+        document.querySelectorAll('.btn-toggle-complete').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const habitoCard = e.target.closest('.habito-card');
+            const habitoId = habitoCard.getAttribute('data-id');
+            toggleCompleteHabito(habitoId);
+          });
+        });
+        
+        document.querySelectorAll('.btn-remove-habito').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const habitoCard = e.target.closest('.habito-card');
+            const habitoId = habitoCard.getAttribute('data-id');
+            removeHabito(habitoId);
+          });
+        });
+      };
+
+      // Alternar estado completo/incompleto do hábito
+      const toggleCompleteHabito = (id) => {
+        const habitoIndex = habitos.findIndex(h => h.id === id);
+        if (habitoIndex === -1) return;
+        
+        habitos[habitoIndex].completed = !habitos[habitoIndex].completed;
+        saveHabitos();
+        
+        // Verificar conquistas
+        const dateStr = formatDate(dataSelecionada);
+        const habitosCompletos = habitos.filter(h => h.data === dateStr && h.completed);
+        checkAchievements(habitosCompletos);
+        
+        // Atualizar exibições
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+      };
+
+      // Remover hábito
+      const removeHabito = (id) => {
+        habitos = habitos.filter(h => h.id !== id);
+        saveHabitos();
+        
+        // Atualizar exibições
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+        
+        showNotification("Hábito removido com sucesso!");
+      };
+
+      // Navegação do calendário
+      const goToPrevMonth = () => {
+        mesAtual--;
+        if (mesAtual < 0) {
+          mesAtual = 11;
+          anoAtual--;
+        }
+        renderCalendar();
+      };
+
+      const goToNextMonth = () => {
+        mesAtual++;
+        if (mesAtual > 11) {
+          mesAtual = 0;
+          anoAtual++;
+        }
+        renderCalendar();
+      };
+
+      const goToToday = () => {
+        mesAtual = hoje.getMonth();
+        anoAtual = hoje.getFullYear();
+        dataSelecionada = new Date(hoje);
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+      };
+
+      prevMonthBtn.addEventListener('click', goToPrevMonth);
+      nextMonthBtn.addEventListener('click', goToNextMonth);
+      todayBtn.addEventListener('click', goToToday);
+
+      // Sistema de abas
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remover classe active de todas as abas e conteúdos
+          tabs.forEach(t => t.classList.remove('active'));
+          tabContents.forEach(c => c.classList.remove('active'));
+          
+          // Adicionar classe active à aba clicada e ao conteúdo correspondente
+          tab.classList.add('active');
+          const tabId = tab.getAttribute('data-tab');
+          document.getElementById(`${tabId}-tab`).classList.add('active');
+          
+          // Se for a aba de conquistas, renderizar
+          if (tabId === 'conquistas') {
+            renderAchievementsTab();
+          }
+        });
+      });
+
+      // Configurações - Salvar
+      document.getElementById('save-settings').addEventListener('click', () => {
+        userSettings = {
+          notifications: document.getElementById('notifications-toggle').checked,
+          dailySummary: document.getElementById('daily-summary-toggle').checked,
+          notificationTime: document.getElementById('notification-time').value,
+          darkMode: document.getElementById('dark-mode-toggle').checked,
+          primaryColor: document.getElementById('primary-color').value
+        };
+        
+        saveSettings();
+      });
+
+      // Configurações - Exportar dados
+      document.getElementById('export-data').addEventListener('click', () => {
+        const data = {
+          habitos: habitos,
+          achievements: userAchievements,
+          settings: userSettings,
+          usuario: usuarioLogado
+        };
+        
+        const dataStr = JSON.stringify(data, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `habitos-saudaveis-backup-${formatDate(new Date())}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showNotification('Dados exportados com sucesso!');
+      });
+
+      // Configurações - Redefinir dados
+      const resetConfirmModal = document.getElementById('reset-confirm-modal');
+      document.getElementById('reset-data').addEventListener('click', () => {
+        resetConfirmModal.style.display = 'flex';
+      });
+
+      document.getElementById('cancel-reset').addEventListener('click', () => {
+        resetConfirmModal.style.display = 'none';
+      });
+
+      document.getElementById('confirm-reset').addEventListener('click', () => {
+        habitos = [];
+        userAchievements = achievements.map(a => ({ ...a, progress: 0 }));
+        saveHabitos();
+        saveAchievements();
+        
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+        renderAchievements();
+        renderAchievementsTab();
+        
+        resetConfirmModal.style.display = 'none';
+        showNotification('Todos os dados foram redefinidos!');
+      });
+
+      // Verificar hábitos pendentes periodicamente (a cada minuto)
+      setInterval(checkPendingHabits, 60000);
+
+      // Inicialização
+      const init = () => {
+        loadSettings();
+        renderCalendar();
+        renderDayExpanded(dataSelecionada);
+        renderAchievements();
+        
+        // Verificar hábitos pendentes imediatamente ao carregar
+        checkPendingHabits();
+        
+        // Agendar notificações para hábitos existentes
+        habitos.forEach(habito => {
+          if (habito.horario && !habito.completed) {
+            scheduleHabitNotification(habito);
+          }
+        });
+      };
+
+      init();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aprova ou Reprova</title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✅</text></svg>">
+</head>
+
+<style>
+  @keyframes brilho1 {
+    0% {
+      text-shadow: 0 0 1px #00ff009e, 0 0 5px #00ff009e, 0 0 1px #00ff009e;
+    }
+
+    50% {
+      text-shadow: 0 0 2px #00ff009e, 0 0 10px #00ff009e, 0 0 2px #00ff009e;
+    }
+
+    100% {
+      text-shadow: 0 0 1px #00ff009e, 0 0 5px #00ff009e, 0 0 1px #00ff009e;
+    }
+  }
+
+  @keyframes brilho2 {
+    0% {
+      text-shadow: 0 0 1px #ff0000a5, 0 0 5px #ff0000a5, 0 0 1px #ff0000a5;
+    }
+
+    50% {
+      text-shadow: 0 0 2px #ff0000a5, 0 0 10px #ff0000a5, 0 0 2px #ff0000a5;
+    }
+
+    100% {
+      text-shadow: 0 0 1px #ff0000a5, 0 0 5px #ff0000a5, 0 0 1px #ff0000a5;
+    }
+  }
+
+  @keyframes brilho3 {
+    0% {
+      text-shadow: 0 0 1px #ffffff9e, 0 0 5px #ffffff9e, 0 0 1px #ffffff9e;
+    }
+
+    50% {
+      text-shadow: 0 0 2px #ffffff9e, 0 0 10px #ffffff9e, 0 0 2px #ffffff9e;
+    }
+
+    100% {
+      text-shadow: 0 0 1px #ffffff9e, 0 0 5px #ffffff9e, 0 0 1px #ffffff9e;
+    }
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: linear-gradient(to right, #1a1919, #1a1a1a);
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 50px;
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-family: "Segoe UI", sans-serif;
+    position: relative;
+    top: 50px;
+    flex-wrap: wrap;
+  }
+
+  .title h1 {
+    font-size: 50px;
+    color: rgb(19, 165, 19);
+    font-weight: bold;
+    animation: brilho1 1s infinite;
+  }
+
+  .title h2 {
+    font-size: 40px;
+    padding-top: 10px;
+    color: aliceblue;
+    animation: brilho3 1s infinite;
+  }
+
+  #h1 {
+    font-size: 50px;
+    color: rgb(165, 19, 19);
+    font-weight: bold;
+    animation: brilho2 1s infinite;
+  }
+
+  #intrgc {
+    color: aliceblue;
+    animation: brilho3 1s infinite;
+  }
+
+  .container {
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-style: solid;
+    padding: 0 15px 20px 15px;
+    border-color: aliceblue;
+    width: 600px;
+    height: auto;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 5px 1px 3px rgb(255, 255, 255);
+  }
+
+  .container h1 {
+    text-align: center;
+    padding-top: 0px;
+    padding-bottom: 20px;
+    font-family: "Segoe UI", sans-serif;
+    color: aliceblue;
+  }
+
+  #nome {
+    width: 80%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-left: 10%;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-family: "Segoe UI", sans-serif;
+    outline: none;
+    transition: all 0.4s ease-in-out;
+    font-weight: bold;
+  }
+
+  .tabela-notas {
+    width: 95%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-top: 0px;
+  }
+
+  .tabela-notas th {
+    font-family: "Segoe UI", sans-serif;
+    font-size: 20px;
+    color: aliceblue;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .tabela-notas td {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .tabela-notas input {
+    width: 80%;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: bold;
+    outline: none;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .container button {
+    width: 60%;
+    height: 50px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-left: 20%;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: "Segoe UI", sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      top: 300px;
+    }
+    
+    .title h1, #h1 {
+      font-size: 30px;
+    }
+    
+    .title h2 {
+      font-size: 25px;
+      padding-top: 5px;
+    }
+    
+    .container {
+      width: 90%;
+      top: 45%;
+      padding: 0 10px 15px 10px;
+    }
+    
+    .container h1 {
+      font-size: 24px;
+      padding-bottom: 15px;
+    }
+    
+    #nome {
+      font-size: 16px;
+      height: 35px;
+      margin-bottom: 20px;
+    }
+    
+    .tabela-notas th {
+      font-size: 16px;
+      padding: 5px;
+    }
+    
+    .tabela-notas input {
+      width: 90%;
+      height: 35px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    
+    .container button {
+      width: 80%;
+      margin-left: 10%;
+      font-size: 20px;
+      height: 45px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .title {
+      top: 90px;
+      gap: 5px;
+    }
+    
+    .title h1, #h1 {
+      font-size: 24px;
+    }
+    
+    .title h2 {
+      font-size: 20px;
+      padding-top: 3px;
+    }
+    
+    .container {
+      width: 95%;
+      top: 40%;
+      padding: 0 5px 10px 5px;
+    }
+    
+    .container h1 {
+      font-size: 20px;
+      padding-bottom: 10px;
+    }
+    
+    #nome {
+      width: 90%;
+      margin-left: 5%;
+      font-size: 14px;
+    }
+    
+    .tabela-notas th {
+      font-size: 14px;
+    }
+    
+    .tabela-notas input {
+      width: 95%;
+      height: 30px;
+      font-size: 12px;
+    }
+    
+    .container button {
+      width: 90%;
+      margin-left: 5%;
+      font-size: 18px;
+      height: 40px;
+    }
+  }
+</style>
+
+<body>
+  <div class="title">
+    <h1>APROVA</h1>
+    <h2>OU</h2>
+    <h1 id="h1">REPROVA</h1>
+    <h1 id="intrgc">?</h1>
+  </div>
+  <div class="container">
+    <h1>DIGITE O NOME DO ALUNO</h1>
+    <input type="text" name="nome" id="nome" placeholder="DIGITE AQUI" />
+    <h1>INSIRA AS NOTAS</h1>
+    <table class="tabela-notas">
+      <tr>
+        <th>1° BIMESTRE</th>
+        <th>2° BIMESTRE</th>
+        <th>3° BIMESTRE</th>
+        <th>4° BIMESTRE</th>
+      </tr>
+      <tr>
+        <td>
+          <input type="number" id="nota1" placeholder="NOTA 1" min="0" max="10" />
+        </td>
+        <td>
+          <input type="number" id="nota2" placeholder="NOTA 2" min="0" max="10" />
+        </td>
+        <td>
+          <input type="number" id="nota3" placeholder="NOTA 3" min="0" max="10" />
+        </td>
+        <td>
+          <input type="number" id="nota4" placeholder="NOTA 4" min="0" max="10" />
+        </td>
+      </tr>
+    </table>
+    <button onclick="calcularNotas()">CALCULAR</button><br />
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularNotas() {
+      var n1 = parseInt(document.getElementById("nota1").value) || 0;
+      var n2 = parseInt(document.getElementById("nota2").value) || 0;
+      var n3 = parseInt(document.getElementById("nota3").value) || 0;
+      var n4 = parseInt(document.getElementById("nota4").value) || 0;
+
+      var soma = n1 + n2 + n3 + n4;
+
+      var resultado = document.getElementById("resultado");
+      if (soma >= 30) {
+        resultado.innerHTML =
+          "<p style='font-family: Segoe UI, sans-serif;color:rgb(19, 165, 19);; font-size: 24px; font-weight: bold; text-align: center;margin-top:15px'>O ALUNO ESTÁ APROVADO</p>";
+      } else {
+        resultado.innerHTML = "<p style='font-family: Segoe UI, sans-serif;color:rgb(165, 19, 19); font-size: 24px; font-weight: bold; text-align: center;margin-top:15px'>O ALUNO ESTÁ REPROVADO</p>";
+      }
+
+      document.getElementById("nota1").value = "";
+      document.getElementById("nota2").value = "";
+      document.getElementById("nota3").value = "";
+      document.getElementById("nota4").value = "";
+      document.getElementById("nome").value = "";
+    }
+  </script>
+</body>
+
+</html>

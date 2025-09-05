@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hábitos Saudáveis | Login</title>
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #3a86ff;
+      --primary-dark: #2667cc;
+      --secondary: #8338ec;
+      --background: #f8f9fa;
+      --text: #212529;
+      --card-bg: #ffffff;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --border-radius: 12px;
+      --success: #2ecc71;
+      --warning: #e74c3c;
+    }
+
+    .dark-mode {
+      --primary: #4cc9f0;
+      --primary-dark: #3aa8cc;
+      --secondary: #7209b7;
+      --background: #121212;
+      --text: #f8f9fa;
+      --card-bg: #1e1e1e;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--card-bg);
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 0.5rem;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px var(--shadow);
+      z-index: 100;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(30deg);
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .auth-card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: 0 4px 6px var(--shadow);
+      transition: var(--transition);
+      border-top: 4px solid var(--primary);
+    }
+
+    .auth-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: var(--border-radius);
+      border: 2px solid #e0e0e0;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: var(--card-bg);
+      color: var(--text);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px var(--shadow);
+    }
+
+    .btn-secondary {
+      background-color: #f1f1f1;
+      color: var(--text);
+      margin-top: 1rem;
+    }
+
+    .dark-mode .btn-secondary {
+      background-color: #2d2d2d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e0e0e0;
+    }
+
+    .dark-mode .btn-secondary:hover {
+      background-color: #3d3d3d;
+    }
+
+    .auth-toggle {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--text);
+      opacity: 0.8;
+    }
+
+    .auth-toggle a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .auth-toggle a:hover {
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: var(--warning);
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <button class="theme-toggle" aria-label="Alterar tema">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <div class="container">
+    <h1><i class="fas fa-user"></i> Hábitos Saudáveis</h1>
+    
+    <div class="auth-card" id="login-card">
+      <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label for="login-senha">Senha</label>
+        <input type="password" id="login-senha" placeholder="Sua senha">
+        <div class="error-message" id="login-error"></div>
+      </div>
+      <button class="btn btn-primary" id="btn-login">
+        <i class="fas fa-sign-in-alt"></i> Entrar
+      </button>
+      <div class="auth-toggle">
+        Não tem uma conta? <a id="toggle-cadastro">Cadastre-se</a>
+      </div>
+    </div>
+
+    <div class="auth-card" id="cadastro-card" style="display: none;">
+      <h2><i class="fas fa-user-plus"></i> Cadastro</h2>
+      <div class="form-group">
+        <label for="cadastro-nome">Nome</label>
+        <input type="text" id="cadastro-nome" placeholder="Seu nome completo">
+      </div>
+      <div class="form-group">
+        <label for="cadastro-email">Email</label>
+        <input type="email" id="cadastro-email" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label for="cadastro-senha">Senha</label>
+        <input type="password" id="cadastro-senha" placeholder="Crie uma senha">
+      </div>
+      <div class="form-group">
+        <label for="cadastro-confirmar">Confirmar Senha</label>
+        <input type="password" id="cadastro-confirmar" placeholder="Confirme sua senha">
+        <div class="error-message" id="cadastro-error"></div>
+      </div>
+      <button class="btn btn-primary" id="btn-cadastro">
+        <i class="fas fa-user-plus"></i> Cadastrar
+      </button>
+      <div class="auth-toggle">
+        Já tem uma conta? <a id="toggle-login">Faça login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sistema de modo claro/escuro
+    const themeToggle = document.querySelector('.theme-toggle');
+    const icon = themeToggle.querySelector('i');
+    
+    // Verifica preferência do usuário
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      document.body.classList.add('dark-mode');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      
+      if (document.body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Alternar entre login e cadastro
+    document.getElementById('toggle-cadastro').addEventListener('click', () => {
+      document.getElementById('login-card').style.display = 'none';
+      document.getElementById('cadastro-card').style.display = 'block';
+    });
+
+    document.getElementById('toggle-login').addEventListener('click', () => {
+      document.getElementById('cadastro-card').style.display = 'none';
+      document.getElementById('login-card').style.display = 'block';
+    });
+
+    // Função para validar email
+    function validarEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    // Função para verificar se usuário está logado
+    function verificarLogin() {
+      const usuario = localStorage.getItem('usuarioLogado');
+      if (usuario) {
+        window.location.href = 'home.html';
+      }
+    }
+
+    // Verificar login ao carregar a página
+    verificarLogin();
+
+    // Cadastro de usuário
+    document.getElementById('btn-cadastro').addEventListener('click', () => {
+      const nome = document.getElementById('cadastro-nome').value.trim();
+      const email = document.getElementById('cadastro-email').value.trim();
+      const senha = document.getElementById('cadastro-senha').value;
+      const confirmar = document.getElementById('cadastro-confirmar').value;
+      const errorElement = document.getElementById('cadastro-error');
+
+      // Validações
+      if (!nome || !email || !senha || !confirmar) {
+        errorElement.textContent = 'Por favor, preencha todos os campos.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      if (!validarEmail(email)) {
+        errorElement.textContent = 'Por favor, insira um email válido.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      if (senha.length < 6) {
+        errorElement.textContent = 'A senha deve ter pelo menos 6 caracteres.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      if (senha !== confirmar) {
+        errorElement.textContent = 'As senhas não coincidem.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      // Verificar se usuário já existe
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const usuarioExistente = usuarios.find(u => u.email === email);
+
+      if (usuarioExistente) {
+        errorElement.textContent = 'Este email já está cadastrado.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      // Criar novo usuário
+      const novoUsuario = {
+        id: Date.now().toString(),
+        nome,
+        email,
+        senha,
+        dataCadastro: new Date().toISOString(),
+        habitos: []
+      };
+
+      usuarios.push(novoUsuario);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+      // Logar automaticamente
+      localStorage.setItem('usuarioLogado', JSON.stringify(novoUsuario));
+      window.location.href = 'home.html';
+    });
+
+    // Login de usuário
+    document.getElementById('btn-login').addEventListener('click', () => {
+      const email = document.getElementById('login-email').value.trim();
+      const senha = document.getElementById('login-senha').value;
+      const errorElement = document.getElementById('login-error');
+
+      // Validações
+      if (!email || !senha) {
+        errorElement.textContent = 'Por favor, preencha todos os campos.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      if (!validarEmail(email)) {
+        errorElement.textContent = 'Por favor, insira um email válido.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      // Verificar credenciais
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+      const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+      if (!usuario) {
+        errorElement.textContent = 'Email ou senha incorretos.';
+        errorElement.style.display = 'block';
+        return;
+      }
+
+      // Logar usuário
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+      window.location.href = 'index.html';
+    });
+
+    // Permitir login com Enter
+    document.getElementById('login-senha').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('btn-login').click();
+      }
+    });
+
+    document.getElementById('cadastro-confirmar').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        document.getElementById('btn-cadastro').click();
+      }
+    });
+  </script>
+</body>
+</html>

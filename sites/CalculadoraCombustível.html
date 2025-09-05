@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛽</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <title>Calculadora de Combustível</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(0deg, #20201f, #28223c, #28223c, #20201f);
+      min-height: 100vh;
+      padding: 20px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+      font-family: "Segoe UI", sans-serif;
+      font-size: clamp(28px, 6vw, 50px);
+      text-align: center;
+      background: linear-gradient(90deg, aliceblue, #e0d6d6, aliceblue);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-top: clamp(20px, 5vw, 50px);
+      padding: 0 10px;
+    }
+
+    .container {
+      border-style: solid;
+      padding: clamp(15px, 3vw, 20px) clamp(10px, 2vw, 15px);
+      border-color: #28223c;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      margin-top: clamp(30px, 5vw, 50px);
+      border-radius: 20px;
+      box-shadow: 4px 4px 7px 10px rgb(46, 15, 99);
+      background-color: #20201f;
+    }
+
+    label {
+      font-family: "Segoe UI", sans-serif;
+      margin-left: 5%;
+      padding: 10px 0;
+      font-size: clamp(18px, 4vw, 22px);
+      font-weight: bold;
+      background: linear-gradient(90deg, aliceblue, #e0d6d6, aliceblue);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      text-shadow: none;
+      display: block;
+    }
+
+    input {
+      font-family: "Segoe UI", sans-serif;
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 1%;
+      padding: clamp(8px, 2vw, 10px);
+      background-color: rgba(9, 9, 9, 0.726);
+      border-radius: 15px;
+      color: #ffffff;
+      font-size: clamp(16px, 3vw, 18px);
+      margin-bottom: clamp(15px, 3vw, 20px);
+      outline: none;
+      font-weight: bold;
+    }
+
+    .container button {
+      width: 90%;
+      max-width: 300px;
+      height: clamp(45px, 8vw, 50px);
+      background-color: rgb(46, 15, 99);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      margin: clamp(15px, 3vw, 20px) auto 0;
+      margin-bottom: clamp(15px, 3vw, 20px);
+      display: block;
+      font-size: clamp(16px, 4vw, 20px);
+      font-weight: bold;
+      font-family: "Segoe UI", sans-serif;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+      box-shadow: 3px 3px 8px 3px rgb(72, 72, 72);
+    }
+
+    .container button:hover {
+      background-color: #210c58;
+      transform: scale(1.02);
+    }
+
+    .result-container {
+      border-style: solid;
+      padding: clamp(15px, 3vw, 20px) clamp(10px, 2vw, 15px);
+      border-color: #28223c;
+      width: 90%;
+      margin: clamp(20px, 5vw, 50px) auto 0;
+      border-radius: 20px;
+      box-shadow: 4px 4px 7px 10px rgb(46, 15, 99);
+      margin-bottom: clamp(15px, 3vw, 20px);
+      background-color: #20201f;
+      display: none;
+    }
+
+    .result-container h3 {
+      font-family: "Segoe UI", sans-serif;
+      font-size: clamp(20px, 4vw, 25px);
+      text-align: center;
+      background: linear-gradient(90deg, aliceblue, #e0d6d6, aliceblue);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-top: 5px;
+    }
+
+    .result-item {
+      font-family: "Segoe UI", sans-serif;
+      font-size: clamp(16px, 3vw, 20px);
+      color: aliceblue;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .reset-button {
+      width: 90%;
+      max-width: 300px;
+      height: clamp(45px, 8vw, 50px);
+      background-color: #3a1b6e;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      margin: 20px auto;
+      font-size: clamp(16px, 4vw, 18px);
+      font-weight: bold;
+      font-family: "Segoe UI", sans-serif;
+      cursor: pointer;
+      transition: all 0.4s ease-in-out;
+      box-shadow: 3px 3px 8px 3px rgb(72, 72, 72);
+      display: none;
+    }
+
+    .reset-button:hover {
+      background-color: #4d258f;
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 480px) {
+
+      .container button,
+      .reset-button {
+        width: 80%;
+      }
+
+      label,
+      input {
+        margin-left: 2%;
+        width: 96%;
+      }
+
+      .result-container {
+        width: 96%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    <i class="bi bi-fuel-pump-diesel-fill"></i> CALCULADORA DE COMBUSTÍVEL
+  </h1>
+  <div class="container">
+    <label for="preco"><i class="bi bi-cash-stack"></i> PREÇO DO COMBUSTÍVEL (L):</label>
+    <input type="number" name="comb" id="comb" placeholder="Ex: 5.75" step="0.01" />
+
+    <label for="desempenho"><i class="bi bi-car-front-fill"></i> DESEMPENHO DO CARRO (KM/L):</label>
+    <input type="number" name="desp" id="desp" placeholder="Ex: 12.5" step="0.1" />
+
+    <label for="distancia"><i class="bi bi-map-fill"></i> DISTANCIA ENTRE AS CIDADES (KM):</label>
+    <input type="number" name="dist" id="dist" placeholder="Ex: 350" />
+
+    <button type="submit" id="calculateBtn">CALCULAR</button>
+
+    <div class="result-container" id="result">
+      <h3>RESULTADO</h3>
+      <div class="result-item" id="litros"></div>
+      <div class="result-item" id="dinheiro"></div>
+    </div>
+
+    <button class="reset-button" id="resetBtn">CALCULAR NOVAMENTE</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      document.getElementById("resetBtn").style.display = "none";
+
+      document.getElementById("calculateBtn").addEventListener("click", verificar);
+      document.getElementById("resetBtn").addEventListener("click", resetarCalculo);
+    });
+
+    function verificar() {
+      var combustivel = +document.getElementById("comb").value;
+      var desempenho = +document.getElementById("desp").value;
+      var distancia = +document.getElementById("dist").value;
+
+      if (isNaN(combustivel) || isNaN(desempenho) || isNaN(distancia) || combustivel <= 0 || desempenho <= 0 || distancia <= 0) {
+        alert("Por favor, insira valores válidos em todos os campos!");
+        return;
+      }
+
+      var qtdlitro = distancia / desempenho;
+      var dinheirogasto = qtdlitro * combustivel;
+
+      document.getElementById("litros").innerHTML = "QUANTIDADE DE LITROS GASTOS: " + qtdlitro.toFixed(2) + "L";
+      document.getElementById("dinheiro").innerHTML = "QUANTIDADE DE DINHEIRO GASTO: R$ " + dinheirogasto.toFixed(2);
+
+      document.getElementById("result").style.display = "block";
+      document.getElementById("resetBtn").style.display = "block";
+      document.getElementById("calculateBtn").style.display = "none";
+
+      document.getElementById("result").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetarCalculo() {
+
+      document.getElementById("comb").value = "";
+      document.getElementById("desp").value = "";
+      document.getElementById("dist").value = "";
+
+      document.getElementById("result").style.display = "none";
+      document.getElementById("resetBtn").style.display = "none";
+      document.getElementById("calculateBtn").style.display = "block";
+
+      document.getElementById("comb").focus();
+    }
+  </script>
+</body>
+
+</html>

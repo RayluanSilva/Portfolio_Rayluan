@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio | Desenvolvedor Front-end</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h2><i class="bi bi-code-slash"></i> Portfólio</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                <li><a href="#education" class="nav-link">Formação</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    Olá, eu sou <span class="highlight">Rayluan Silva</span>
+                </h1>
+                <h2 class="hero-subtitle">Estudante de Informática para Internet</h2>
+                <p class="hero-description">
+                    Apaixonado por tecnologia e desenvolvimento web, cursando técnico em 
+                    Informática para Internet na Etec Astor de Mattos Carvalho. 
+                    Especializado em criar soluções web interativas e funcionais.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="bi bi-folder-fill"></i> Ver Projetos
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="bi bi-envelope-fill"></i> Contato
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="code-animation">
+                    <div class="code-line"></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="bi bi-chevron-down"></i>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Sou estudante do 3º ano do curso técnico em <strong>Informática para Internet</strong> 
+                        na Etec Astor de Mattos Carvalho. Minha paixão pela tecnologia me levou a desenvolver 
+                        diversos projetos práticos que demonstram minhas habilidades em desenvolvimento web.
+                    </p>
+                    <p>
+                        Tenho experiência em <strong>HTML5, CSS3 e JavaScript</strong>, além de conhecimentos 
+                        em PHP e MySQL para desenvolvimento back-end. Meu objetivo é atuar profissionalmente 
+                        na área de desenvolvimento web, criando soluções inovadoras e funcionais.
+                    </p>
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <i class="bi bi-trophy-fill"></i>
+                            <span>TCC sobre Plataforma de Simulados</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="bi bi-code-square"></i>
+                            <span>6+ Projetos Desenvolvidos</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="bi bi-gear-fill"></i>
+                            <span>Foco em Soluções Práticas</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <h3>3+</h3>
+                        <p>Anos de Estudo</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>6+</h3>
+                        <p>Projetos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>5+</h3>
+                        <p>Tecnologias</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Meus Projetos</h2>
+            <p class="section-subtitle">Confira alguns dos projetos que desenvolvi durante meus estudos</p>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-project="energia">
+                    <div class="project-image">
+                        <i class="bi bi-lightning-charge-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Calculadora de Energia</h3>
+                        <p>Sistema completo para cálculo de consumo de energia elétrica com geração de fatura e simulação de pagamento com troco.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/CalculoEnergia.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('energia')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="aprova">
+                    <div class="project-image">
+                        <i class="bi bi-mortarboard-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Aprova ou Reprova</h3>
+                        <p>Aplicação para calcular médias escolares dos 4 bimestres e determinar aprovação ou reprovação do aluno.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/AprovaouReprova.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('aprova')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="saque">
+                    <div class="project-image">
+                        <i class="bi bi-bank project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Saque Bancário</h3>
+                        <p>Simulador de saque bancário que calcula automaticamente a quantidade ideal de cédulas para qualquer valor.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/SaqueBancario.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('saque')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="combustivel">
+                    <div class="project-image">
+                        <i class="bi bi-fuel-pump-diesel-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Calculadora de Combustível</h3>
+                        <p>Ferramenta para calcular gastos com combustível em viagens, considerando preço, consumo và distância.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/CalculadoraCombustível.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('combustivel')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="habitos">
+                    <div class="project-image">
+                        <i class="bi bi-heart-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Site de Hábitos Saudáveis</h3>
+                        <p>Plataforma para acompanhamento de hábitos saudáveis com formulários e painel de progresso usando localStorage.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">LocalStorage</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/habitos/inicio.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('habitos')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card featured" data-project="tcc">
+                    <div class="project-image">
+                        <i class="bi bi-award-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>TCC - Plataforma Simulando</h3>
+                        <p>Projeto de conclusão de curso:  plataforma completa de criação e resolução de Simulados, com correção automática, painel administrativo e exportação de relatórios.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-buttons">
+                             <a href="https://simulando.byethost15.com/" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('tcc')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Habilidades Técnicas</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="bi bi-palette-fill"></i> Front-end</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="bi bi-server"></i> Back-end</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-php"></i>
+                            <span>PHP</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>MySQL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3><i class="bi bi-tools"></i> Ferramentas</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-code"></i>
+                            <span>VS Code</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">Formação Acadêmica</h2>
+            <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Técnico em Informática para Internet</h3>
+                        <h4>Etec Astor de Mattos Carvalho</h4>
+                        <p class="timeline-date">2023 - 2025</p>
+                        <p>Curso técnico integrado ao ensino médio com foco em desenvolvimento web, programação e análise de sistemas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="section-subtitle">Vamos conversar sobre oportunidades e projetos</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>slvrayluan08@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p><a href="https://www.linkedin.com/in/rayluan-silva-6a4754375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Clique Aqui</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <p><a href="https://github.com/RayluanSilva">Clique Aqui</a></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Seu Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-send-fill"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Portfólio. Desenvolvido por Rayluan Silva.</p>
+        </div>
+    </footer>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
