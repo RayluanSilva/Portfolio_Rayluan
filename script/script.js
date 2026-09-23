@@ -61,6 +61,7 @@ const previewObserver = new IntersectionObserver(entries => {
         if (!entry.isIntersecting) return;
         const frame = entry.target.querySelector('iframe[data-src]');
         if (frame) {
+            frame.setAttribute('scrolling', 'no');
             frame.src = frame.dataset.src;
             frame.removeAttribute('data-src');
         }
