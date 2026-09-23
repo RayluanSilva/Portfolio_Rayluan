@@ -119,6 +119,36 @@ const projectsData = {
         technologies: ['HTML5', 'CSS3', 'JavaScript', 'LocalStorage API'],
         challenges: 'Implementar um sistema completo de gerenciamento de dados no front-end usando apenas localStorage e criar uma arquitetura CSS escalável.',
     },
+    salao: {
+        title: 'Salão da Leila — Sistema de Agendamento',
+        description: 'Sistema de agendamento para salão de beleza, desenvolvido como teste prático para uma vaga de desenvolvimento. Clientes agendam serviços online e a administradora gerencia tudo por um painel com dashboard de faturamento.',
+        features: [
+            'Cadastro e login com Firebase Authentication',
+            'Agendamento de um ou mais serviços por vez',
+            'Aviso de agendamento na mesma semana',
+            'Alteração e cancelamento até 2 dias antes',
+            'Histórico com filtro por período',
+            'Painel administrativo com status por serviço',
+            'Dashboard com faturamento, ticket médio e serviços mais pedidos',
+            'Regras de segurança no Cloud Firestore'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Firebase Authentication', 'Cloud Firestore'],
+        challenges: 'Garantir que cada cliente veja e altere apenas os próprios agendamentos, usando regras de segurança do Firestore, e calcular os indicadores do dashboard direto no front-end.',
+    },
+    burger: {
+        title: 'Burger on the Grill — Site de Hamburgueria',
+        description: 'Site institucional responsivo para uma hamburgueria de Cabrália Paulista/SP, pensado para celular e para levar o cliente direto ao pedido pelo WhatsApp.',
+        features: [
+            'Layout responsivo (mobile first)',
+            'Galeria de fotos dos produtos',
+            'Cardápio organizado por categorias',
+            'Seção de avaliações de clientes',
+            'Mapa com localização e horário de funcionamento',
+            'Botão de contato direto pelo WhatsApp'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        challenges: 'Criar uma identidade visual marcante e manter a página leve e rápida em celulares.',
+    },
     tcc: {
         title: 'TCC - Plataforma Simulando',
         description: 'Projeto de conclusão de curso: plataforma completa de criação e resolução de Simulados, com correção automática, sistema de login diferenciado para alunos e professores, painel administrativo e sistema de relatórios.',
