@@ -2,7 +2,7 @@
 
 Meu portfólio pessoal, com os projetos que desenvolvi durante o curso técnico em Informática para Internet (ETEC) e depois dele.
 
-🔗 **Acesse online:** https://rayluansilva.github.io/Portfolio_Rayluan/
+**Acesse online:** https://rayluansilva.github.io/Portfolio_Rayluan/
 
 ## Projetos incluídos
 
