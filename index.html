@@ -4,7 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rayluan Silva | Desenvolvedor Web</title>
-    <meta name="description" content="Portfólio de Rayluan Silva, desenvolvedor web (PHP, JavaScript e MySQL), estudante de Análise e Desenvolvimento de Sistemas.">
+    <meta name="description" content="Portfólio de Rayluan Silva, desenvolvedor web (PHP, JavaScript e MySQL), estagiário de desenvolvimento na Airys e estudante de Análise e Desenvolvimento de Sistemas.">
+    <meta name="theme-color" content="#0a0f1c">
+    <meta property="og:title" content="Rayluan Silva | Desenvolvedor Web">
+    <meta property="og:description" content="Projetos em PHP, JavaScript, MySQL e Firebase: do front-end ao banco de dados.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rayluansilva.github.io/Portfolio_Rayluan/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2360a5fa'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='700' text-anchor='middle' fill='%230a0f1c'%3ERS%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -12,461 +21,397 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <div class="nav-brand">
-                <h2><i class="bi bi-code-slash"></i> Rayluan Silva</h2>
-            </div>
+            <a href="#home" class="nav-brand" aria-label="Início">
+                <span class="brand-mark">RS</span>
+                <span>Rayluan Silva</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Início</a></li>
                 <li><a href="#about" class="nav-link">Sobre</a></li>
                 <li><a href="#projects" class="nav-link">Projetos</a></li>
                 <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                <li><a href="#education" class="nav-link">Experiência</a></li>
+                <li><a href="#experience" class="nav-link">Experiência</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
+                <li class="nav-cta"><a href="#contact" class="btn btn-primary btn-sm"><i class="bi bi-send-fill"></i> Fale comigo</a></li>
             </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="hamburger" aria-label="Abrir menu">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    Olá, eu sou <span class="highlight">Rayluan Silva</span>
-                </h1>
-                <h2 class="hero-subtitle">Desenvolvedor Web · PHP, JavaScript e MySQL</h2>
-                <p class="hero-description">
-                    Técnico em Informática para Internet pela ETEC, estudante de Análise e Desenvolvimento
-                    de Sistemas na Unimar e estagiário de desenvolvimento na Airys, onde trabalho com
-                    integrações da API do WhatsApp, banco de dados e servidores.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="bi bi-folder-fill"></i> Ver Projetos
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="bi bi-envelope-fill"></i> Contato
-                    </a>
+    <main>
+        <!-- ================= HERO ================= -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content reveal">
+                        <span class="status-badge"><span class="status-dot"></span> Estagiário de desenvolvimento na Airys</span>
+                        <h1 class="hero-title">Olá, eu sou <span class="gradient-text">Rayluan Silva</span></h1>
+                        <p class="hero-subtitle">Desenvolvedor Web · PHP, JavaScript e MySQL</p>
+                        <p class="hero-description">
+                            Construo sistemas completos, da interface ao banco de dados. Técnico em Informática para Internet
+                            pela ETEC, estudante de Análise e Desenvolvimento de Sistemas na Unimar e estagiário na Airys,
+                            onde trabalho com integrações da API do WhatsApp, banco de dados e servidores.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#projects" class="btn btn-primary"><i class="bi bi-grid-1x2-fill"></i> Ver projetos</a>
+                            <a href="#contact" class="btn btn-secondary"><i class="bi bi-envelope"></i> Entrar em contato</a>
+                        </div>
+                        <div class="hero-social">
+                            <a href="https://github.com/RayluanSilva" target="_blank" rel="noopener" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                            <a href="https://www.linkedin.com/in/rayluan-silva" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="mailto:slvrayluan08@gmail.com" aria-label="E-mail"><i class="bi bi-envelope-fill"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual reveal">
+                        <div class="code-window">
+                            <div class="code-header"><span></span><span></span><span></span><p>rayluan.php</p></div>
+<div class="code-body"><span class="c-com">// quem sou eu, em poucas linhas</span>
+<span class="c-key">$</span><span class="c-var">dev</span> = [
+    <span class="c-str">'nome'</span>    =&gt; <span class="c-str">'Rayluan Silva'</span>,
+    <span class="c-str">'cargo'</span>   =&gt; <span class="c-str">'Estagiário de Dev · Airys'</span>,
+    <span class="c-str">'stack'</span>   =&gt; [<span class="c-str">'PHP'</span>, <span class="c-str">'JavaScript'</span>, <span class="c-str">'MySQL'</span>],
+    <span class="c-str">'estudo'</span>  =&gt; <span class="c-str">'ADS · Unimar'</span>,
+    <span class="c-str">'foco'</span>    =&gt; <span class="c-str">'APIs e integrações'</span>,
+];
+
+<span class="c-key">echo</span> <span class="c-fn">json_encode</span>(<span class="c-key">$</span><span class="c-var">dev</span>);</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item reveal"><strong>8</strong><span>projetos publicados</span></div>
+                    <div class="stat-item reveal"><strong>3+ anos</strong><span>estudando desenvolvimento</span></div>
+                    <div class="stat-item reveal"><strong>Full stack</strong><span>front-end, back-end e banco</span></div>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="code-animation">
-                    <div class="code-line"></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"></div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <i class="bi bi-chevron-down"></i>
-        </div>
-    </section>
+        </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Sou formado no curso técnico em <strong>Informática para Internet</strong> pela Etec Astor de Mattos Carvalho
-                        e curso <strong>Análise e Desenvolvimento de Sistemas</strong> na Unimar. Atualmente sou estagiário de
-                        desenvolvimento na <strong>Airys</strong>, atuando com integrações da API do WhatsApp, banco de dados e servidores.
-                    </p>
-                    <p>
-                        Gosto de construir sistemas completos, da interface ao banco de dados: trabalho com <strong>HTML5, CSS3 e JavaScript</strong>
-                        no front-end e <strong>PHP, MySQL e Firebase</strong> no back-end. Meu TCC foi uma plataforma de simulados com
-                        correção automática e painéis diferentes para alunos e professores.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="bi bi-trophy-fill"></i>
-                            <span>TCC sobre Plataforma de Simulados</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="bi bi-code-square"></i>
-                            <span>8 Projetos Publicados</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="bi bi-gear-fill"></i>
-                            <span>Estágio em Desenvolvimento na Airys</span>
-                        </div>
-                    </div>
+        <!-- ================= SOBRE ================= -->
+        <section id="about" class="section-alt">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">01 · Sobre mim</p>
+                    <h2 class="section-title">Da interface ao banco de dados</h2>
                 </div>
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <h3>3+</h3>
-                        <p>Anos de Estudo</p>
+                <div class="about-grid">
+                    <div class="about-text reveal">
+                        <p>
+                            Sou formado no curso técnico em <strong>Informática para Internet</strong> pela Etec Astor de Mattos Carvalho
+                            e curso <strong>Análise e Desenvolvimento de Sistemas</strong> na Unimar. Hoje sou estagiário de
+                            desenvolvimento na <strong>Airys</strong>, atuando com integrações da API do WhatsApp, banco de dados e servidores
+                            no AirysChat, uma plataforma de atendimento e automação com IA.
+                        </p>
+                        <p>
+                            Gosto de construir sistemas completos: trabalho com <strong>HTML5, CSS3 e JavaScript</strong> no front-end e
+                            <strong>PHP, MySQL e Firebase</strong> no back-end. Meu TCC foi uma plataforma de simulados com correção
+                            automática e painéis diferentes para alunos, professores e administradores.
+                        </p>
+                        <p>
+                            Aprendo rápido, gosto de investigar um problema até achar a causa e sempre versiono meus projetos no GitHub.
+                        </p>
                     </div>
-                    <div class="stat-item">
-                        <h3>8</h3>
-                        <p>Projetos</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>6+</h3>
-                        <p>Tecnologias</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Meus Projetos</h2>
-            <p class="section-subtitle">Confira alguns dos projetos que desenvolvi durante meus estudos</p>
-            
-            <div class="projects-grid">
-                <div class="project-card featured" data-project="tcc">
-                    <div class="project-image">
-                        <i class="bi bi-award-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>TCC - Plataforma Simulando</h3>
-                        <p>Projeto de conclusão de curso:  plataforma completa de criação e resolução de Simulados, com correção automática, painel administrativo e exportação de relatórios.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
+                    <div class="about-cards">
+                        <div class="info-card reveal">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <div><h3>Airys Tecnologia</h3><p>Estagiário de Desenvolvimento · 2026 – atual</p></div>
                         </div>
-                        <div class="project-buttons">
-                             <a href="https://simulando.byethost15.com/" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('tcc')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
+                        <div class="info-card reveal">
+                            <i class="bi bi-mortarboard-fill"></i>
+                            <div><h3>Unimar</h3><p>Análise e Desenvolvimento de Sistemas · 2026 – 2027</p></div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="project-card featured" data-project="salao">
-                    <div class="project-image">
-                        <i class="bi bi-calendar-check-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Salão da Leila — Sistema de Agendamento</h3>
-                        <p>Sistema de agendamento online com login, painel administrativo e dashboard de faturamento, usando Firebase Authentication e Cloud Firestore.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Firebase</span>
+                        <div class="info-card reveal">
+                            <i class="bi bi-award-fill"></i>
+                            <div><h3>ETEC Astor de Mattos Carvalho</h3><p>Técnico em Informática para Internet · 2023 – 2025</p></div>
                         </div>
-                        <div class="project-buttons">
-                            <a href="https://salao-da-leila.vercel.app" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <a href="https://github.com/RayluanSilva/salao-da-leila" target="_blank" class="btn-small btn-secondary">
-                                <i class="bi bi-github"></i> Código
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('salao')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="habitos">
-                    <div class="project-image">
-                        <i class="bi bi-heart-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Site de Hábitos Saudáveis</h3>
-                        <p>Plataforma para acompanhamento de hábitos saudáveis com formulários e painel de progresso usando localStorage.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">LocalStorage</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/habitos/inicio.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('habitos')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="burger">
-                    <div class="project-image">
-                        <i class="bi bi-fire project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Burger on the Grill — Site de Hamburgueria</h3>
-                        <p>Site responsivo para uma hamburgueria de Cabrália Paulista, com galeria, cardápio, avaliações, mapa e contato direto pelo WhatsApp.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="https://rayluansilva.github.io/Burguer-On-the-Grill/" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <a href="https://github.com/RayluanSilva/Burguer-On-the-Grill" target="_blank" class="btn-small btn-secondary">
-                                <i class="bi bi-github"></i> Código
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('burger')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="energia">
-                    <div class="project-image">
-                        <i class="bi bi-lightning-charge-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Calculadora de Energia</h3>
-                        <p>Sistema completo para cálculo de consumo de energia elétrica com geração de fatura e simulação de pagamento com troco.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/CalculoEnergia.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('energia')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="aprova">
-                    <div class="project-image">
-                        <i class="bi bi-mortarboard-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Aprova ou Reprova</h3>
-                        <p>Aplicação para calcular médias escolares dos 4 bimestres e determinar aprovação ou reprovação do aluno.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/AprovaouReprova.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('aprova')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="saque">
-                    <div class="project-image">
-                        <i class="bi bi-bank project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Saque Bancário</h3>
-                        <p>Simulador de saque bancário que calcula automaticamente a quantidade ideal de cédulas para qualquer valor.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/SaqueBancario.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('saque')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="combustivel">
-                    <div class="project-image">
-                        <i class="bi bi-fuel-pump-diesel-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Calculadora de Combustível</h3>
-                        <p>Ferramenta para calcular gastos com combustível em viagens, considerando preço, consumo e distância.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/CalculadoraCombustível.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ver projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('combustivel')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
+                        <div class="info-card reveal">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <div><h3>Cabrália Paulista, SP</h3><p>Disponível para trabalho remoto</p></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Habilidades Técnicas</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="bi bi-palette-fill"></i> Front-end</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML5</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fab fa-js-square"></i>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
+        <!-- ================= PROJETOS ================= -->
+        <section id="projects">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">02 · Projetos</p>
+                    <h2 class="section-title">Projetos em destaque</h2>
+                    <p class="section-subtitle">Sistemas completos, com login, banco de dados e painel administrativo. Todos estão no ar e com o código aberto no GitHub.</p>
                 </div>
-                
-                <div class="skill-category">
-                    <h3><i class="bi bi-server"></i> Back-end</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-php"></i>
-                            <span>PHP</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-database"></i>
-                            <span>MySQL</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-fire"></i>
-                            <span>Firebase</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3><i class="bi bi-tools"></i> Ferramentas</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-item">
-                            <i class="fas fa-code"></i>
-                            <span>VS Code</span>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </section>
 
-    <section id="education" class="education">
-        <div class="container">
-            <h2 class="section-title">Experiência e Formação</h2>
-            <div class="education-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Estagiário de Desenvolvimento</h3>
-                        <h4>Airys Tecnologia</h4>
-                        <p class="timeline-date">2026 - atual · Remoto</p>
-                        <p>Desenvolvimento no AirysChat, plataforma de atendimento e automação com IA, com foco em integrações com a API do WhatsApp, banco de dados e servidores.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Análise e Desenvolvimento de Sistemas</h3>
-                        <h4>Unimar - Universidade de Marília</h4>
-                        <p class="timeline-date">2026 - 2027 (em andamento)</p>
-                        <p>Graduação tecnológica com foco em desenvolvimento de software, banco de dados e análise de sistemas.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Técnico em Informática para Internet</h3>
-                        <h4>Etec Astor de Mattos Carvalho</h4>
-                        <p class="timeline-date">2023 - 2025</p>
-                        <p>Curso técnico integrado ao ensino médio com foco em desenvolvimento web, programação e análise de sistemas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="featured-list">
+                    <article class="featured-card reveal">
+                        <div class="featured-cover cover-tcc">
+                            <div class="mock" aria-hidden="true">
+                                <div class="mock-top"><b>Simulado ENEM · Matemática</b><span class="mock-pill">45:12</span></div>
+                                <div class="mock-row"><i class="bi bi-check-circle-fill"></i> Questão 12 <span>correta</span></div>
+                                <div class="mock-row"><i class="bi bi-check-circle-fill"></i> Questão 13 <span>correta</span></div>
+                                <div class="mock-row"><i class="bi bi-circle"></i> Questão 14 <span>pendente</span></div>
+                                <div class="mock-bar"><div></div></div>
+                            </div>
+                        </div>
+                        <div class="featured-body">
+                            <span class="project-label">TCC · Full stack</span>
+                            <h3>Simulando: plataforma de simulados</h3>
+                            <p>Plataforma para criar e resolver simulados, com correção automática e três perfis de acesso: aluno, professor e administrador.</p>
+                            <ul class="feature-bullets">
+                                <li><i class="bi bi-check2"></i> Simulado cronometrado com correção automática</li>
+                                <li><i class="bi bi-check2"></i> Professor cria questões com imagem e gera simulados</li>
+                                <li><i class="bi bi-check2"></i> Exportação de resultados para Excel</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tech-tag">PHP</span><span class="tech-tag">MySQL</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Bootstrap</span>
+                            </div>
+                            <div class="project-buttons">
+                                <a href="https://simulando.byethost15.com/" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-up-right"></i> Ver site</a>
+                                <a href="https://github.com/RayluanSilva/simulando" target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><i class="bi bi-github"></i> Código</a>
+                                <button class="btn btn-secondary btn-sm" data-modal="tcc"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Entre em Contato</h2>
-            <p class="section-subtitle">Vamos conversar sobre oportunidades e projetos</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="bi bi-envelope-fill"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>slvrayluan08@gmail.com</p>
+                    <article class="featured-card reveal">
+                        <div class="featured-cover cover-salao">
+                            <div class="mock" aria-hidden="true">
+                                <div class="mock-top"><b>Agendamentos da semana</b><span class="mock-pill">+12%</span></div>
+                                <div class="mock-row"><i class="bi bi-scissors"></i> Corte e escova <span>ter · 14h</span></div>
+                                <div class="mock-row"><i class="bi bi-brush"></i> Manicure <span>qua · 10h</span></div>
+                                <div class="mock-row"><i class="bi bi-graph-up"></i> Faturamento do mês <span>dashboard</span></div>
+                                <div class="mock-bar"><div></div></div>
+                            </div>
+                        </div>
+                        <div class="featured-body">
+                            <span class="project-label">Teste prático · Firebase</span>
+                            <h3>Salão da Leila: agendamento online</h3>
+                            <p>Sistema de agendamento com login de clientes, painel administrativo e dashboard de faturamento.</p>
+                            <ul class="feature-bullets">
+                                <li><i class="bi bi-check2"></i> Login com Firebase Authentication</li>
+                                <li><i class="bi bi-check2"></i> Regras de segurança no Cloud Firestore</li>
+                                <li><i class="bi bi-check2"></i> Dashboard com faturamento e ticket médio</li>
+                            </ul>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span><span class="tech-tag">Firebase</span><span class="tech-tag">Firestore</span><span class="tech-tag">HTML/CSS</span>
+                            </div>
+                            <div class="project-buttons">
+                                <a href="https://salao-da-leila.vercel.app" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-up-right"></i> Ver site</a>
+                                <a href="https://github.com/RayluanSilva/salao-da-leila" target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><i class="bi bi-github"></i> Código</a>
+                                <button class="btn btn-secondary btn-sm" data-modal="salao"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="projects-grid">
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-heart-pulse preview-icon"></i><iframe data-src="sites/habitos/inicio.html" title="Prévia do Site de Hábitos Saudáveis" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Hábitos Saudáveis</h3>
+                            <p>Acompanhamento de hábitos com login, calendário, metas e conquistas, salvando tudo no navegador.</p>
+                            <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">localStorage</span></div>
+                            <div class="project-links">
+                                <a href="https://rayluansilva.github.io/habitos-saudaveis/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <a href="https://github.com/RayluanSilva/habitos-saudaveis" target="_blank" rel="noopener"><i class="bi bi-github"></i> Código</a>
+                                <button data-modal="habitos"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-fire preview-icon"></i><iframe data-src="https://rayluansilva.github.io/Burguer-On-the-Grill/" title="Prévia do site Burger on the Grill" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Burger on the Grill</h3>
+                            <p>Site responsivo de hamburgueria com cardápio, galeria, mapa e pedido direto pelo WhatsApp.</p>
+                            <div class="project-tech"><span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span></div>
+                            <div class="project-links">
+                                <a href="https://rayluansilva.github.io/Burguer-On-the-Grill/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <a href="https://github.com/RayluanSilva/Burguer-On-the-Grill" target="_blank" rel="noopener"><i class="bi bi-github"></i> Código</a>
+                                <button data-modal="burger"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-lightning-charge preview-icon"></i><iframe data-src="sites/CalculoEnergia.html" title="Prévia da Calculadora de Energia" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Calculadora de Energia</h3>
+                            <p>Calcula o consumo por tipo de cliente, gera a fatura e simula o pagamento com troco.</p>
+                            <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Validação</span></div>
+                            <div class="project-links">
+                                <a href="sites/CalculoEnergia.html" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <button data-modal="energia"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-journal-check preview-icon"></i><iframe data-src="sites/AprovaouReprova.html" title="Prévia do Aprova ou Reprova" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Aprova ou Reprova</h3>
+                            <p>Calcula a média dos quatro bimestres e mostra se o aluno foi aprovado.</p>
+                            <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">CSS Animations</span></div>
+                            <div class="project-links">
+                                <a href="sites/AprovaouReprova.html" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <button data-modal="aprova"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-cash-stack preview-icon"></i><iframe data-src="sites/SaqueBancario.html" title="Prévia do Saque Bancário" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Saque Bancário</h3>
+                            <p>Simula um caixa eletrônico e calcula a menor quantidade de cédulas para o valor pedido.</p>
+                            <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Algoritmo</span></div>
+                            <div class="project-links">
+                                <a href="sites/SaqueBancario.html" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <button data-modal="saque"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card reveal">
+                        <div class="preview"><i class="bi bi-fuel-pump preview-icon"></i><iframe data-src="sites/CalculadoraCombustível.html" title="Prévia da Calculadora de Combustível" loading="lazy" tabindex="-1"></iframe></div>
+                        <div class="project-content">
+                            <h3>Calculadora de Combustível</h3>
+                            <p>Calcula o gasto de uma viagem a partir do preço, do consumo do carro e da distância.</p>
+                            <div class="project-tech"><span class="tech-tag">JavaScript</span><span class="tech-tag">Responsivo</span></div>
+                            <div class="project-links">
+                                <a href="sites/CalculadoraCombustível.html" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Site</a>
+                                <button data-modal="combustivel"><i class="bi bi-info-circle"></i> Detalhes</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= HABILIDADES ================= -->
+        <section id="skills" class="section-alt">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">03 · Habilidades</p>
+                    <h2 class="section-title">Tecnologias que uso</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-category reveal">
+                        <h3><i class="bi bi-window"></i> Front-end</h3>
+                        <div class="skill-items">
+                            <span class="skill-item"><i class="fab fa-html5"></i> HTML5</span>
+                            <span class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</span>
+                            <span class="skill-item"><i class="fab fa-js"></i> JavaScript</span>
+                            <span class="skill-item"><i class="fab fa-bootstrap"></i> Bootstrap</span>
+                            <span class="skill-item"><i class="bi bi-phone"></i> Responsividade</span>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="bi bi-linkedin"></i>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <p><a href="https://www.linkedin.com/in/rayluan-silva" target="_blank">linkedin.com/in/rayluan-silva</a></p>
+                    <div class="skill-category reveal">
+                        <h3><i class="bi bi-hdd-stack"></i> Back-end e dados</h3>
+                        <div class="skill-items">
+                            <span class="skill-item"><i class="fab fa-php"></i> PHP</span>
+                            <span class="skill-item"><i class="fas fa-database"></i> MySQL / SQL</span>
+                            <span class="skill-item"><i class="fas fa-fire"></i> Firebase</span>
+                            <span class="skill-item"><i class="bi bi-plug"></i> APIs REST</span>
+                            <span class="skill-item"><i class="fab fa-whatsapp"></i> API do WhatsApp</span>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <i class="bi bi-github"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <p><a href="https://github.com/RayluanSilva" target="_blank">github.com/RayluanSilva</a></p>
+                    <div class="skill-category reveal">
+                        <h3><i class="bi bi-tools"></i> Ferramentas</h3>
+                        <div class="skill-items">
+                            <span class="skill-item"><i class="fab fa-git-alt"></i> Git</span>
+                            <span class="skill-item"><i class="fab fa-github"></i> GitHub</span>
+                            <span class="skill-item"><i class="bi bi-code-square"></i> VS Code</span>
+                            <span class="skill-item"><i class="bi bi-server"></i> Servidores</span>
+                            <span class="skill-item"><i class="bi bi-translate"></i> Inglês intermediário</span>
                         </div>
                     </div>
                 </div>
-                
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Seu Nome" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Seu Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" rows="5" placeholder="Sua Mensagem" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-send-fill"></i> Enviar Mensagem
-                    </button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- ================= EXPERIÊNCIA ================= -->
+        <section id="experience">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">04 · Trajetória</p>
+                    <h2 class="section-title">Experiência e formação</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-top"><h3>Estagiário de Desenvolvimento</h3><span class="timeline-date">2026 – atual · Remoto</span></div>
+                            <h4>Airys Tecnologia</h4>
+                            <p>Desenvolvimento no AirysChat, plataforma de atendimento e automação com IA, com foco em integrações com a API do WhatsApp, banco de dados e servidores.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-top"><h3>Análise e Desenvolvimento de Sistemas</h3><span class="timeline-date">2026 – 2027 · em andamento</span></div>
+                            <h4>Unimar · Universidade de Marília</h4>
+                            <p>Graduação tecnológica com foco em desenvolvimento de software, banco de dados e análise de sistemas.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-top"><h3>Técnico em Informática para Internet</h3><span class="timeline-date">2023 – 2025</span></div>
+                            <h4>ETEC Astor de Mattos Carvalho</h4>
+                            <p>Desenvolvimento web completo: HTML, CSS, JavaScript, PHP e MySQL. TCC: plataforma Simulando.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTATO ================= -->
+        <section id="contact" class="section-alt">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">05 · Contato</p>
+                    <h2 class="section-title">Vamos conversar?</h2>
+                    <p class="section-subtitle">Estou aberto a oportunidades em desenvolvimento web e suporte técnico. Respondo rápido.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <a class="contact-item reveal" href="mailto:slvrayluan08@gmail.com">
+                            <i class="bi bi-envelope-fill"></i>
+                            <div><h4>E-mail</h4><p>slvrayluan08@gmail.com</p></div>
+                        </a>
+                        <a class="contact-item reveal" href="https://www.linkedin.com/in/rayluan-silva" target="_blank" rel="noopener">
+                            <i class="bi bi-linkedin"></i>
+                            <div><h4>LinkedIn</h4><p>linkedin.com/in/rayluan-silva</p></div>
+                        </a>
+                        <a class="contact-item reveal" href="https://github.com/RayluanSilva" target="_blank" rel="noopener">
+                            <i class="bi bi-github"></i>
+                            <div><h4>GitHub</h4><p>github.com/RayluanSilva</p></div>
+                        </a>
+                    </div>
+                    <form id="contactForm" class="contact-form reveal">
+                        <div class="form-group"><input type="text" id="name" placeholder="Seu nome" required></div>
+                        <div class="form-group"><input type="email" id="email" placeholder="Seu e-mail" required></div>
+                        <div class="form-group"><textarea id="message" rows="5" placeholder="Sua mensagem" required></textarea></div>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-send-fill"></i> Enviar mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Rayluan Silva. Desenvolvido com HTML, CSS e JavaScript.</p>
+            <p>&copy; <span id="year">2026</span> Rayluan Silva. Feito com HTML, CSS e JavaScript.</p>
+            <p><a href="https://github.com/RayluanSilva/Portfolio_Rayluan" target="_blank" rel="noopener"><i class="bi bi-github"></i> Código deste site</a></p>
         </div>
     </footer>
 
-    <div id="projectModal" class="modal">
+    <div id="projectModal" class="modal" role="dialog" aria-modal="true">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" aria-label="Fechar">&times;</span>
             <div id="modalBody"></div>
         </div>
     </div>
