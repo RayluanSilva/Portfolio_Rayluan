@@ -1,3 +1,10 @@
+/* =========================================================
+   Portfólio de Rayluan Silva
+   Menu, link ativo, animação ao rolar, prévias dos projetos,
+   janela de detalhes (modal) e formulário de contato.
+   ========================================================= */
+
+/* ---------- Menu mobile ---------- */
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -6,121 +13,85 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
 }));
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+/* ---------- Link ativo conforme a seção visível ---------- */
+const sections = document.querySelectorAll('main section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
 
-window.addEventListener('scroll', () => {
+function updateActiveLink() {
     let current = '';
-    const sections = document.querySelectorAll('section');
-    
     sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
+        if (window.scrollY >= section.offsetTop - 140) current = section.id;
+    });
+    navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+}
+window.addEventListener('scroll', updateActiveLink, { passive: true });
+updateActiveLink();
+
+/* ---------- Animação de entrada ao rolar ---------- */
+const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
         }
     });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ---------- Prévias dos projetos (iframe reduzido) ----------
+   Cada iframe tem 1280x800 px e é reduzido com transform: scale()
+   para caber no card. Ele só carrega quando o card aparece na tela. */
+function scalePreviews() {
+    document.querySelectorAll('.preview').forEach(preview => {
+        const frame = preview.querySelector('iframe');
+        if (frame) frame.style.transform = `scale(${preview.clientWidth / 1280})`;
     });
-});
+}
 
-const modal = document.getElementById('projectModal');
-const modalBody = document.getElementById('modalBody');
-const closeBtn = document.querySelector('.close');
+const previewObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const frame = entry.target.querySelector('iframe[data-src]');
+        if (frame) {
+            frame.src = frame.dataset.src;
+            frame.removeAttribute('data-src');
+        }
+        previewObserver.unobserve(entry.target);
+    });
+}, { rootMargin: '200px' });
 
+document.querySelectorAll('.preview').forEach(p => previewObserver.observe(p));
+window.addEventListener('resize', scalePreviews);
+scalePreviews();
+
+/* ---------- Dados dos projetos (usados no modal) ---------- */
 const projectsData = {
-    energia: {
-        title: 'Calculadora de Energia',
-        description: 'Sistema completo para cálculo de consumo de energia elétrica com diferentes tipos de clientes (residencial, comercial e industrial). O sistema gera uma fatura detalhada e simula o processo de pagamento com cálculo de troco.',
+    tcc: {
+        title: 'Simulando: plataforma de simulados (TCC)',
+        description: 'Projeto de conclusão do curso técnico: plataforma completa para criar e resolver simulados, com correção automática e três perfis de acesso (aluno, professor e administrador).',
         features: [
-            'Validação de dados em tempo real',
-            'Cálculo automático baseado no tipo de cliente',
-            'Geração de fatura detalhada',
-            'Simulação de pagamento com troco',
-            'Interface responsiva e intuitiva',
-            'Animações e efeitos visuais'
+            'Login com perfis diferentes para aluno, professor e administrador',
+            'Simulado cronometrado com correção automática',
+            'Professor cadastra questões (com imagem) usando um código de acesso',
+            'Gerador de simulados a partir do banco de questões',
+            'Exportação de resultados para planilha Excel',
+            'Painel administrativo para gerenciar usuários e conteúdo'
         ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap Icons'],
-        challenges: 'O principal desafio foi implementar a validação em tempo real e criar uma experiência de usuário fluida com múltiplas etapas de processo.',
-    },
-    aprova: {
-        title: 'Aprova ou Reprova',
-        description: 'Aplicação educacional que calcula a média das notas dos 4 bimestres escolares e determina se o aluno foi aprovado ou reprovado, considerando a nota mínima de 30 pontos.',
-        features: [
-            'Cálculo automático de médias',
-            'Validação de notas (0-10)',
-            'Feedback visual imediato',
-            'Design responsivo',
-            'Animações de texto brilhante',
-            'Interface intuitiva para educadores'
-        ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'CSS Animations'],
-        challenges: 'Criar uma interface visualmente atrativa com animações CSS personalizadas e garantir a responsividade em diferentes dispositivos.',
-    },
-    saque: {
-        title: 'Saque Bancário',
-        description: 'Simulador de saque bancário que calcula automaticamente a quantidade ideal de cédulas (R$100, R$50, R$20, R$10, R$5, R$1) para qualquer valor de saque solicitado.',
-        features: [
-            'Algoritmo otimizado para cálculo de cédulas',
-            'Validação de valores de entrada',
-            'Interface moderna com gradientes',
-            'Exibição detalhada do resultado',
-            'Funcionalidade de voltar e refazer',
-            'Design responsivo'
-        ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap Icons'],
-        challenges: 'Desenvolver um algoritmo eficiente para distribuição de cédulas e criar uma interface que simule a experiência real de um caixa eletrônico.',
-    },
-    combustivel: {
-        title: 'Calculadora de Combustível',
-        description: 'Ferramenta prática para calcular gastos com combustível em viagens, considerando o preço do combustível, consumo do veículo (km/l) e distância a percorrer.',
-        features: [
-            'Cálculo preciso de consumo e gastos',
-            'Validação de dados de entrada',
-            'Interface com gradientes personalizados',
-            'Resultados detalhados e claros',
-            'Funcionalidade de recálculo',
-            'Design totalmente responsivo'
-        ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap Icons'],
-        challenges: 'Criar uma interface visualmente atrativa com gradientes complexos e garantir cálculos precisos para diferentes cenários de viagem.',
-    },
-    habitos: {
-        title: 'Site de Hábitos Saudáveis',
-        description: 'Plataforma completa para acompanhamento de hábitos saudáveis com sistema de cadastro, painel de progresso e armazenamento local de dados usando localStorage.',
-        features: [
-            'Sistema CRUD completo para hábitos',
-            'Armazenamento local com localStorage',
-            'Painel de progresso interativo',
-            'Formulários de cadastro validados',
-            'CSS centralizado e organizado',
-            'Interface responsiva e moderna'
-        ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'LocalStorage API'],
-        challenges: 'Implementar um sistema completo de gerenciamento de dados no front-end usando apenas localStorage e criar uma arquitetura CSS escalável.',
+        technologies: ['PHP (PDO)', 'MySQL', 'JavaScript', 'HTML5', 'CSS3', 'Bootstrap 5'],
+        challenges: 'Construir uma aplicação full stack com níveis de acesso diferentes, modelar o banco de dados das questões e respostas e gerar relatórios a partir dos resultados.',
+        demo: 'https://simulando.byethost15.com/',
+        repo: 'https://github.com/RayluanSilva/simulando'
     },
     salao: {
-        title: 'Salão da Leila — Sistema de Agendamento',
+        title: 'Salão da Leila: sistema de agendamento',
         description: 'Sistema de agendamento para salão de beleza, desenvolvido como teste prático para uma vaga de desenvolvimento. Clientes agendam serviços online e a administradora gerencia tudo por um painel com dashboard de faturamento.',
         features: [
             'Cadastro e login com Firebase Authentication',
@@ -134,9 +105,27 @@ const projectsData = {
         ],
         technologies: ['HTML5', 'CSS3', 'JavaScript', 'Firebase Authentication', 'Cloud Firestore'],
         challenges: 'Garantir que cada cliente veja e altere apenas os próprios agendamentos, usando regras de segurança do Firestore, e calcular os indicadores do dashboard direto no front-end.',
+        demo: 'https://salao-da-leila.vercel.app',
+        repo: 'https://github.com/RayluanSilva/salao-da-leila'
+    },
+    habitos: {
+        title: 'Hábitos Saudáveis',
+        description: 'Site para acompanhar hábitos saudáveis: o usuário entra, marca os hábitos do dia e acompanha o progresso em um painel com calendário e conquistas. Os dados ficam salvos no próprio navegador.',
+        features: [
+            'Página inicial, login e painel de hábitos',
+            'Cadastro, edição e exclusão de hábitos',
+            'Calendário com o histórico de cada dia',
+            'Metas e conquistas desbloqueáveis',
+            'Dados salvos com localStorage',
+            'Layout responsivo'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'localStorage'],
+        challenges: 'Gerenciar todos os dados só no front-end com localStorage e manter o código organizado em várias telas.',
+        demo: 'https://rayluansilva.github.io/habitos-saudaveis/',
+        repo: 'https://github.com/RayluanSilva/habitos-saudaveis'
     },
     burger: {
-        title: 'Burger on the Grill — Site de Hamburgueria',
+        title: 'Burger on the Grill: site de hamburgueria',
         description: 'Site institucional responsivo para uma hamburgueria de Cabrália Paulista/SP, pensado para celular e para levar o cliente direto ao pedido pelo WhatsApp.',
         features: [
             'Layout responsivo (mobile first)',
@@ -148,290 +137,145 @@ const projectsData = {
         ],
         technologies: ['HTML5', 'CSS3', 'JavaScript'],
         challenges: 'Criar uma identidade visual marcante e manter a página leve e rápida em celulares.',
+        demo: 'https://rayluansilva.github.io/Burguer-On-the-Grill/',
+        repo: 'https://github.com/RayluanSilva/Burguer-On-the-Grill'
     },
-    tcc: {
-        title: 'TCC - Plataforma Simulando',
-        description: 'Projeto de conclusão de curso: plataforma completa de criação e resolução de Simulados, com correção automática, sistema de login diferenciado para alunos e professores, painel administrativo e sistema de relatórios.',
+    energia: {
+        title: 'Calculadora de Energia',
+        description: 'Calcula o consumo de energia elétrica para clientes residenciais, comerciais e industriais, gera uma fatura detalhada e simula o pagamento com cálculo de troco.',
         features: [
-            'Sistema de autenticação completo',
-            'Correção automática de simulados',
-            'Cronômetro Inteligente',
-            'Relatórios em Planilhas Excel',
-            'Painel diferenciado para alunos e professores',
-            'Banco de questões do ENEM',
-            'Sistema de simulados cronometrados',
-            'Relatórios de desempenho detalhados',
-            'Interface administrativa completa',
-            'Banco de dados MySQL integrado'
+            'Validação de dados em tempo real',
+            'Cálculo automático conforme o tipo de cliente',
+            'Fatura detalhada',
+            'Simulação de pagamento com troco',
+            'Interface responsiva'
         ],
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL', 'Bootstrap'],
-        challenges: 'Desenvolver uma aplicação full-stack completa com diferentes níveis de acesso, integração com banco de dados e sistema de relatórios complexos.',
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        challenges: 'Validar os dados em tempo real e manter a experiência fluida entre as etapas do processo.',
+        demo: 'sites/CalculoEnergia.html'
     },
+    aprova: {
+        title: 'Aprova ou Reprova',
+        description: 'Calcula a média das notas dos quatro bimestres e informa se o aluno foi aprovado ou reprovado, considerando a nota mínima de 30 pontos.',
+        features: [
+            'Cálculo automático da média',
+            'Validação das notas (0 a 10)',
+            'Resultado visual imediato',
+            'Animações em CSS',
+            'Design responsivo'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        challenges: 'Criar animações em CSS sem prejudicar a responsividade em telas diferentes.',
+        demo: 'sites/AprovaouReprova.html'
+    },
+    saque: {
+        title: 'Saque Bancário',
+        description: 'Simulador de caixa eletrônico que calcula a menor quantidade de cédulas (R$ 100, 50, 20, 10, 5 e 1) para o valor pedido.',
+        features: [
+            'Algoritmo que usa sempre a maior cédula possível',
+            'Validação do valor digitado',
+            'Resultado detalhado por cédula',
+            'Opção de voltar e refazer',
+            'Design responsivo'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        challenges: 'Escrever um algoritmo guloso simples e correto para distribuir as cédulas.',
+        demo: 'sites/SaqueBancario.html'
+    },
+    combustivel: {
+        title: 'Calculadora de Combustível',
+        description: 'Calcula o gasto com combustível em uma viagem a partir do preço do litro, do consumo do veículo (km/l) e da distância.',
+        features: [
+            'Cálculo de litros e custo total',
+            'Validação dos dados de entrada',
+            'Resultado claro e detalhado',
+            'Opção de recalcular',
+            'Design responsivo'
+        ],
+        technologies: ['HTML5', 'CSS3', 'JavaScript'],
+        challenges: 'Garantir cálculos corretos com números decimais e uma interface simples de usar.',
+        demo: 'sites/CalculadoraCombustível.html'
+    }
 };
 
-function openModal(projectKey) {
-    const project = projectsData[projectKey];
-    if (!project) return;
+/* ---------- Modal de detalhes ---------- */
+const modal = document.getElementById('projectModal');
+const modalBody = document.getElementById('modalBody');
+
+function openModal(key) {
+    const p = projectsData[key];
+    if (!p) return;
+
+    const links = [
+        p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="bi bi-box-arrow-up-right"></i> Ver site</a>` : '',
+        p.repo ? `<a href="${p.repo}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm"><i class="bi bi-github"></i> Código</a>` : ''
+    ].join('');
 
     modalBody.innerHTML = `
-        <h2>${project.title}</h2>
-        <p class="project-description">${project.description}</p>
-        
-        <h3><i class="bi bi-star-fill"></i> Principais Funcionalidades</h3>
-        <ul class="feature-list">
-            ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-        </ul>
-        
-        <h3><i class="bi bi-tools"></i> Tecnologias Utilizadas</h3>
-        <div class="tech-tags">
-            ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-        </div>
-        
-        <h3><i class="bi bi-lightbulb-fill"></i> Desafios e Aprendizados</h3>
-        <p>${project.challenges}</p>
-        
-        ${project.demo ? `
-            <div class="modal-buttons">
-                <a href="${project.demo}" target="_blank" class="btn btn-primary">
-                    <i class="bi bi-eye-fill"></i> Ver Demonstração
-                </a>
-            </div>
-        ` : ''}
+        <h2>${p.title}</h2>
+        <p class="modal-desc">${p.description}</p>
+        <h3 class="modal-heading">Funcionalidades</h3>
+        <ul class="feature-bullets">${p.features.map(f => `<li><i class="bi bi-check2"></i> ${f}</li>`).join('')}</ul>
+        <h3 class="modal-heading">Tecnologias</h3>
+        <div class="project-tech">${p.technologies.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div>
+        <h3 class="modal-heading">Desafio</h3>
+        <p class="modal-desc">${p.challenges}</p>
+        <div class="project-buttons">${links}</div>
     `;
-    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
-closeBtn.addEventListener('click', closeModal);
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
-});
-
 function closeModal() {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    document.body.style.overflow = '';
 }
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-        closeModal();
-    }
+document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.modal));
 });
+document.querySelector('.close').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+/* ---------- Formulário de contato ----------
+   O site é estático (GitHub Pages), então o formulário abre o
+   programa de e-mail da pessoa com a mensagem já preenchida. */
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
+
+contactForm.addEventListener('submit', e => {
     e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    const subject = `Contato do Portfólio - ${name}`;
-    const body = `Nome: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMensagem:%0D%0A${message}`;
-    
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+        showNotification('Preencha todos os campos.', 'error');
+        return;
+    }
+
+    const subject = encodeURIComponent(`Contato pelo portfólio: ${name}`);
+    const body = encodeURIComponent(`Nome: ${name}\nE-mail: ${email}\n\n${message}`);
     window.location.href = `mailto:slvrayluan08@gmail.com?subject=${subject}&body=${body}`;
-    
-    showNotification('Redirecionando para o cliente de email...', 'success');
-    setTimeout(() => {
-        contactForm.reset();
-    }, 1000);
+
+    showNotification('Abrindo seu programa de e-mail…', 'success');
+    contactForm.reset();
 });
 
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="bi bi-check-circle-fill"></i>
-            <span>${message}</span>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
+function showNotification(text, type = 'success') {
+    const old = document.querySelector('.notification');
+    if (old) old.remove();
+
+    const n = document.createElement('div');
+    n.className = `notification ${type}`;
+    n.innerHTML = `<i class="bi ${type === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-circle-fill'}"></i><span>${text}</span>`;
+    document.body.appendChild(n);
+    requestAnimationFrame(() => n.classList.add('show'));
     setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-    
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 4000);
+        n.classList.remove('show');
+        setTimeout(() => n.remove(), 300);
+    }, 3500);
 }
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.project-card, .skill-category, .timeline-item, .stat-item').forEach(el => {
-    observer.observe(el);
-});
-
-const heroTitle = document.querySelector('.hero-title');
-if (heroTitle) {
-    const text = heroTitle.textContent;
-    heroTitle.textContent = '';
-    
-    let i = 0;
-    const typeWriter = () => {
-        if (i < text.length) {
-            heroTitle.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100);
-        }
-    };
-    
-    setTimeout(typeWriter, 1000);
-}
-
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-item h3');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.textContent);
-        const increment = target / 50;
-        let current = 0;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                counter.textContent = Math.ceil(current) + '+';
-                setTimeout(updateCounter, 30);
-            } else {
-                counter.textContent = target + '+';
-            }
-        };
-        
-        updateCounter();
-    });
-}
-
-const aboutSection = document.querySelector('#about');
-const aboutObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounters();
-            aboutObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-if (aboutSection) {
-    aboutObserver.observe(aboutSection);
-}
-
-const additionalStyles = `
-    .notification {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--card);
-        border: 1px solid var(--primary);
-        border-radius: 8px;
-        padding: 1rem;
-        z-index: 3000;
-        transform: translateX(400px);
-        transition: transform 0.3s ease;
-        box-shadow: var(--shadow);
-    }
-    
-    .notification.show {
-        transform: translateX(0);
-    }
-    
-    .notification.success {
-        border-color: var(--primary);
-    }
-    
-    .notification-content {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--text);
-    }
-    
-    .notification-content i {
-        color: var(--primary);
-    }
-    
-    .animate-in {
-        animation: slideInUp 0.6s ease forwards;
-    }
-    
-    @keyframes slideInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .feature-list {
-        list-style: none;
-        padding: 0;
-        margin: 1rem 0;
-    }
-    
-    .feature-list li {
-        padding: 0.5rem 0;
-        padding-left: 1.5rem;
-        position: relative;
-        color: var(--text-light);
-    }
-    
-    .feature-list li::before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: var(--primary);
-        font-weight: bold;
-    }
-    
-    .project-description {
-        color: var(--text-light);
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 2rem;
-    }
-    
-    .modal-buttons {
-        margin-top: 2rem;
-        text-align: center;
-    }
-    
-    .tech-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin: 1rem 0;
-    }
-    
-    #modalBody h3 {
-        color: var(--primary);
-        margin: 1.5rem 0 1rem 0;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-`;
-
-const styleSheet = document.createElement('style');
-styleSheet.textContent = additionalStyles;
-document.head.appendChild(styleSheet);
+/* ---------- Ano atual no rodapé ---------- */
+document.getElementById('year').textContent = new Date().getFullYear();
