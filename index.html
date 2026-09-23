@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio | Desenvolvedor Front-end</title>
+    <title>Rayluan Silva | Desenvolvedor Web</title>
+    <meta name="description" content="Portfólio de Rayluan Silva, desenvolvedor web (PHP, JavaScript e MySQL), estudante de Análise e Desenvolvimento de Sistemas.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -12,14 +13,14 @@
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <h2><i class="bi bi-code-slash"></i> Portfólio</h2>
+                <h2><i class="bi bi-code-slash"></i> Rayluan Silva</h2>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Início</a></li>
                 <li><a href="#about" class="nav-link">Sobre</a></li>
                 <li><a href="#projects" class="nav-link">Projetos</a></li>
                 <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                <li><a href="#education" class="nav-link">Formação</a></li>
+                <li><a href="#education" class="nav-link">Experiência</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
             <div class="hamburger">
@@ -36,11 +37,11 @@
                 <h1 class="hero-title">
                     Olá, eu sou <span class="highlight">Rayluan Silva</span>
                 </h1>
-                <h2 class="hero-subtitle">Estudante de Informática para Internet</h2>
+                <h2 class="hero-subtitle">Desenvolvedor Web · PHP, JavaScript e MySQL</h2>
                 <p class="hero-description">
-                    Apaixonado por tecnologia e desenvolvimento web, cursando técnico em 
-                    Informática para Internet na Etec Astor de Mattos Carvalho. 
-                    Especializado em criar soluções web interativas e funcionais.
+                    Técnico em Informática para Internet pela ETEC, estudante de Análise e Desenvolvimento
+                    de Sistemas na Unimar e estagiário de desenvolvimento na Airys, onde trabalho com
+                    integrações da API do WhatsApp, banco de dados e servidores.
                 </p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn btn-primary">
@@ -71,14 +72,14 @@
             <div class="about-content">
                 <div class="about-text">
                     <p>
-                        Sou estudante do 3º ano do curso técnico em <strong>Informática para Internet</strong> 
-                        na Etec Astor de Mattos Carvalho. Minha paixão pela tecnologia me levou a desenvolver 
-                        diversos projetos práticos que demonstram minhas habilidades em desenvolvimento web.
+                        Sou formado no curso técnico em <strong>Informática para Internet</strong> pela Etec Astor de Mattos Carvalho
+                        e curso <strong>Análise e Desenvolvimento de Sistemas</strong> na Unimar. Atualmente sou estagiário de
+                        desenvolvimento na <strong>Airys</strong>, atuando com integrações da API do WhatsApp, banco de dados e servidores.
                     </p>
                     <p>
-                        Tenho experiência em <strong>HTML5, CSS3 e JavaScript</strong>, além de conhecimentos 
-                        em PHP e MySQL para desenvolvimento back-end. Meu objetivo é atuar profissionalmente 
-                        na área de desenvolvimento web, criando soluções inovadoras e funcionais.
+                        Gosto de construir sistemas completos, da interface ao banco de dados: trabalho com <strong>HTML5, CSS3 e JavaScript</strong>
+                        no front-end e <strong>PHP, MySQL e Firebase</strong> no back-end. Meu TCC foi uma plataforma de simulados com
+                        correção automática e painéis diferentes para alunos e professores.
                     </p>
                     <div class="about-highlights">
                         <div class="highlight-item">
@@ -87,11 +88,11 @@
                         </div>
                         <div class="highlight-item">
                             <i class="bi bi-code-square"></i>
-                            <span>6+ Projetos Desenvolvidos</span>
+                            <span>8 Projetos Publicados</span>
                         </div>
                         <div class="highlight-item">
                             <i class="bi bi-gear-fill"></i>
-                            <span>Foco em Soluções Práticas</span>
+                            <span>Estágio em Desenvolvimento na Airys</span>
                         </div>
                     </div>
                 </div>
@@ -101,11 +102,11 @@
                         <p>Anos de Estudo</p>
                     </div>
                     <div class="stat-item">
-                        <h3>6+</h3>
+                        <h3>8</h3>
                         <p>Projetos</p>
                     </div>
                     <div class="stat-item">
-                        <h3>5+</h3>
+                        <h3>6+</h3>
                         <p>Tecnologias</p>
                     </div>
                 </div>
@@ -119,6 +120,108 @@
             <p class="section-subtitle">Confira alguns dos projetos que desenvolvi durante meus estudos</p>
             
             <div class="projects-grid">
+                <div class="project-card featured" data-project="tcc">
+                    <div class="project-image">
+                        <i class="bi bi-award-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>TCC - Plataforma Simulando</h3>
+                        <p>Projeto de conclusão de curso:  plataforma completa de criação e resolução de Simulados, com correção automática, painel administrativo e exportação de relatórios.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-buttons">
+                             <a href="https://simulando.byethost15.com/" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ver projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('tcc')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card featured" data-project="salao">
+                    <div class="project-image">
+                        <i class="bi bi-calendar-check-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Salão da Leila — Sistema de Agendamento</h3>
+                        <p>Sistema de agendamento online com login, painel administrativo e dashboard de faturamento, usando Firebase Authentication e Cloud Firestore.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Firebase</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://salao-da-leila.vercel.app" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ver projeto
+                            </a>
+                            <a href="https://github.com/RayluanSilva/salao-da-leila" target="_blank" class="btn-small btn-secondary">
+                                <i class="bi bi-github"></i> Código
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('salao')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="habitos">
+                    <div class="project-image">
+                        <i class="bi bi-heart-fill project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Site de Hábitos Saudáveis</h3>
+                        <p>Plataforma para acompanhamento de hábitos saudáveis com formulários e painel de progresso usando localStorage.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">LocalStorage</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="sites/habitos/inicio.html" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ver projeto
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('habitos')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-project="burger">
+                    <div class="project-image">
+                        <i class="bi bi-fire project-icon"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Burger on the Grill — Site de Hamburgueria</h3>
+                        <p>Site responsivo para uma hamburgueria de Cabrália Paulista, com galeria, cardápio, avaliações, mapa e contato direto pelo WhatsApp.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://rayluansilva.github.io/Burguer-On-the-Grill/" target="_blank" class="btn-small btn-primary">
+                                <i class="bi bi-eye-fill"></i> Ver projeto
+                            </a>
+                            <a href="https://github.com/RayluanSilva/Burguer-On-the-Grill" target="_blank" class="btn-small btn-secondary">
+                                <i class="bi bi-github"></i> Código
+                            </a>
+                            <button class="btn-small btn-secondary" onclick="openModal('burger')">
+                                <i class="bi bi-info-circle-fill"></i> Detalhes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card" data-project="energia">
                     <div class="project-image">
                         <i class="bi bi-lightning-charge-fill project-icon"></i>
@@ -133,7 +236,7 @@
                         </div>
                         <div class="project-buttons">
                             <a href="sites/CalculoEnergia.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                                <i class="bi bi-eye-fill"></i> Ver projeto
                             </a>
                             <button class="btn-small btn-secondary" onclick="openModal('energia')">
                                 <i class="bi bi-info-circle-fill"></i> Detalhes
@@ -156,7 +259,7 @@
                         </div>
                         <div class="project-buttons">
                             <a href="sites/AprovaouReprova.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                                <i class="bi bi-eye-fill"></i> Ver projeto
                             </a>
                             <button class="btn-small btn-secondary" onclick="openModal('aprova')">
                                 <i class="bi bi-info-circle-fill"></i> Detalhes
@@ -179,7 +282,7 @@
                         </div>
                         <div class="project-buttons">
                             <a href="sites/SaqueBancario.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                                <i class="bi bi-eye-fill"></i> Ver projeto
                             </a>
                             <button class="btn-small btn-secondary" onclick="openModal('saque')">
                                 <i class="bi bi-info-circle-fill"></i> Detalhes
@@ -194,7 +297,7 @@
                     </div>
                     <div class="project-content">
                         <h3>Calculadora de Combustível</h3>
-                        <p>Ferramenta para calcular gastos com combustível em viagens, considerando preço, consumo và distância.</p>
+                        <p>Ferramenta para calcular gastos com combustível em viagens, considerando preço, consumo e distância.</p>
                         <div class="project-tech">
                             <span class="tech-tag">HTML</span>
                             <span class="tech-tag">CSS</span>
@@ -202,58 +305,9 @@
                         </div>
                         <div class="project-buttons">
                             <a href="sites/CalculadoraCombustível.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
+                                <i class="bi bi-eye-fill"></i> Ver projeto
                             </a>
                             <button class="btn-small btn-secondary" onclick="openModal('combustivel')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-project="habitos">
-                    <div class="project-image">
-                        <i class="bi bi-heart-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Site de Hábitos Saudáveis</h3>
-                        <p>Plataforma para acompanhamento de hábitos saudáveis com formulários e painel de progresso usando localStorage.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">LocalStorage</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="sites/habitos/inicio.html" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('habitos')">
-                                <i class="bi bi-info-circle-fill"></i> Detalhes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card featured" data-project="tcc">
-                    <div class="project-image">
-                        <i class="bi bi-award-fill project-icon"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>TCC - Plataforma Simulando</h3>
-                        <p>Projeto de conclusão de curso:  plataforma completa de criação e resolução de Simulados, com correção automática, painel administrativo e exportação de relatórios.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                        </div>
-                        <div class="project-buttons">
-                             <a href="https://simulando.byethost15.com/" target="_blank" class="btn-small btn-primary">
-                                <i class="bi bi-eye-fill"></i> Ir para o projeto
-                            </a>
-                            <button class="btn-small btn-secondary" onclick="openModal('tcc')">
                                 <i class="bi bi-info-circle-fill"></i> Detalhes
                             </button>
                         </div>
@@ -296,6 +350,10 @@
                             <i class="fas fa-database"></i>
                             <span>MySQL</span>
                         </div>
+                        <div class="skill-item">
+                            <i class="fas fa-fire"></i>
+                            <span>Firebase</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -319,8 +377,26 @@
 
     <section id="education" class="education">
         <div class="container">
-            <h2 class="section-title">Formação Acadêmica</h2>
+            <h2 class="section-title">Experiência e Formação</h2>
             <div class="education-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Estagiário de Desenvolvimento</h3>
+                        <h4>Airys Tecnologia</h4>
+                        <p class="timeline-date">2026 - atual · Remoto</p>
+                        <p>Desenvolvimento no AirysChat, plataforma de atendimento e automação com IA, com foco em integrações com a API do WhatsApp, banco de dados e servidores.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Análise e Desenvolvimento de Sistemas</h3>
+                        <h4>Unimar - Universidade de Marília</h4>
+                        <p class="timeline-date">2026 - 2027 (em andamento)</p>
+                        <p>Graduação tecnológica com foco em desenvolvimento de software, banco de dados e análise de sistemas.</p>
+                    </div>
+                </div>
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
@@ -352,14 +428,14 @@
                         <i class="bi bi-linkedin"></i>
                         <div>
                             <h4>LinkedIn</h4>
-                            <p><a href="https://www.linkedin.com/in/rayluan-silva-6a4754375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Clique Aqui</a></p>
+                            <p><a href="https://www.linkedin.com/in/rayluan-silva" target="_blank">linkedin.com/in/rayluan-silva</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="bi bi-github"></i>
                         <div>
                             <h4>GitHub</h4>
-                            <p><a href="https://github.com/RayluanSilva">Clique Aqui</a></p>
+                            <p><a href="https://github.com/RayluanSilva" target="_blank">github.com/RayluanSilva</a></p>
                         </div>
                     </div>
                 </div>
@@ -384,7 +460,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 - Portfólio. Desenvolvido por Rayluan Silva.</p>
+            <p>&copy; 2026 Rayluan Silva. Desenvolvido com HTML, CSS e JavaScript.</p>
         </div>
     </footer>
 
